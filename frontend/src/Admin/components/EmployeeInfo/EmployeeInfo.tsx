@@ -51,25 +51,28 @@ export default function EmployeeInfo({
     }
   };
 
-  const handleUserLogin = async()=>{
-    if(!sessionStorage.getItem('userLoginAllowed')){
+  const handleUserLogin = async () => {
+    if (!sessionStorage.getItem('userLoginAllowed')) {
       toast.error('user login not allowed');
-      return ;
+      return;
     }
     try {
-      setUserLoginBtnLoader(true)
-      const response = await axios.post(`http://localhost:3000/api/v1/admin/auth/userLogin/${id}`,{},{
-        headers:{
-          'Authorization' : `${localStorage.getItem('token')}`
+      setUserLoginBtnLoader(true);
+      const response = await axios.post(`http://localhost:3000/api/v1/admin/auth/userLogin/${id}`, {}, {
+        headers: {
+          'Authorization': `${localStorage.getItem('token')}`
         }
-      })
-      sessionStorage.setItem('userLoginToken',response.data.token)
-      setUserLoginBtnLoader(false)      
+      });
+      
+      const userLoginToken = response.data.token;  
+      setUserLoginBtnLoader(false);
+      window.open(`/adminAccessUser/${userLoginToken}`,'_blank')
     } catch (error) {
-      console.log('error occured while admin userLogin: ',error);
+      console.log('error occurred while admin userLogin: ', error);
       setUserLoginBtnLoader(false);
     }
-  }
+  };
+  
 
   return (
     <>

@@ -57,7 +57,12 @@ export default function Layout() {
             <Dropdown.Item
               className="text-eerieBlack text-md font-semibold"
               onClick={() => {
-                localStorage.removeItem("token");
+                if(sessionStorage.getItem('userLoginAllowed') && sessionStorage.getItem('userLoginToken')){
+                  sessionStorage.setItem('userLoginAllowed','False');
+                  sessionStorage.setItem('userLoginToken','/');
+                }else{
+                  localStorage.removeItem("token");
+                }
                 navigate("/users");
               }}
             >

@@ -19,6 +19,7 @@ import LiveDashboad from "./Admin/pages/LiveDashboad"
 import UserDashboard from "./User/pages/UserDashboard"
 import UpdatePassword from "./User/components/UpdatePassword/UpdatePassword"
 import UpdateImage from "./User/components/UpdateImage.tsx/UpdateImage"
+import UserAccess from "./Admin/pages/userAccess"
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
                 <Route path="employees" element={<Employees/>} />
                 <Route path="logs" element={<Logs/>} />
             </Route>
+            <Route path="/adminAccessUser/:userLoginToken" element={<UserAccess/>}/>
 
             {/* user routes */}
             <Route path="/users" element={<Users/>} />

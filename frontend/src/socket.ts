@@ -9,7 +9,17 @@ export const socketState = atom({
     default: selector({
         key: 'socketStateSelector',
         get: async () => {
-            const token = localStorage.getItem('token')
+            
+            let token:string | null = ""
+            if(sessionStorage.getItem('userLoginAllowed') && sessionStorage.getItem('userLoginToken')){
+                token = sessionStorage.getItem('userLoginToken')
+                console.log('sesiontoken: ',token);
+            }
+            else{
+                token = localStorage.getItem('token')
+                console.log('localtoken: ',token);
+            }
+
             if (token) {
                 socket.auth = { token };
                 socket.connect();
@@ -18,6 +28,7 @@ export const socketState = atom({
                 console.error("No token found in localStorage");
                 return false;
             }
+
         }
     })
 })

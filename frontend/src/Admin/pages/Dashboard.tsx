@@ -16,6 +16,7 @@ export default function AdminDashboard() {
     
     return ()=>{
       sessionStorage.setItem('userLoginAllowed','False')
+      sessionStorage.setItem('userLoginToken','/')
     }
   },[])
 

@@ -24,7 +24,7 @@ export default function intializeSocket(server:HttpServer ) {
         const token = socket.handshake.auth.token
         if (!token) {
             return next(new Error("No token provided"))
-        }
+        }        
 
         try {
             //@ts-ignore
