@@ -46,7 +46,7 @@ export default function () {
       formData.append("password", data.password);
       const response = await axios.put(
         //@ts-ignore
-        `http://localhost:3000/api/v1/user/changePassword/${user._id}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/user/changePassword/${user._id}`,
         formData,
         {
           headers: {

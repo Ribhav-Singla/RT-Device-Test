@@ -13,9 +13,10 @@ const upload_1 = require("./Route/upload");
 const http_1 = require("http");
 const socket_1 = __importDefault(require("./Route/socket"));
 const logs_1 = require("./Route/logs");
-mongoose_1.default.connect('mongodb://127.0.0.1:27017/deviceWebsite')
+mongoose_1.default.connect('mongodb+srv://ribhavsingla:65fRLQQa1jKtstQr@cluster0.fb6ouk3.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
     .then(() => console.log('db connected'))
     .catch((error) => console.log('error while connecting to db: ', error));
+const PORT = process.env.PORT || 3000;
 const app = (0, express_1.default)();
 const server = (0, http_1.createServer)(app);
 (0, socket_1.default)(server);
@@ -27,6 +28,6 @@ app.use('/api/v1/admin', Admin_1.adminRouter);
 app.use('/api/v1/user', User_1.userRouter);
 app.use('/api/v1/', upload_1.imageRouter);
 app.use('/api/v1/log/', logs_1.logRouter);
-server.listen(3000, () => {
+server.listen(PORT, () => {
     console.log('server started');
 });

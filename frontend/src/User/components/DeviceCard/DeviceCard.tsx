@@ -23,7 +23,7 @@ export default function DeviceCard({ device }: { device: Device }) {
     try {
       setBtnLoader(true);
       const response = await axios.post(
-        `http://localhost:3000/api/v1/user/bookDevice/${device._id}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/user/bookDevice/${device._id}`,
         {},
         {
           headers: {
@@ -68,7 +68,7 @@ export default function DeviceCard({ device }: { device: Device }) {
         <motion.div className="w-[190px] h-[180px] flex justify-center items-center">
           <img
             src={
-              device.image ? `http://localhost:3000/${device.image}` : Device
+              device.image ? `${import.meta.env.VITE_BACKEND_URL}/${device.image}` : Device
             }
             alt="User Image"
             className="text-center object-contain max-h-[180px]"

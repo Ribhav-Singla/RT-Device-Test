@@ -116,6 +116,7 @@ userRouter.post('/bookDevice/:id', userAuth, async (req, res) => {
         }
         device.isBooked = true
         device.bookedBy = userId
+        device.bookedDate = new Date()
         await device.save()
 
         const user = await Employee.findById(userId)

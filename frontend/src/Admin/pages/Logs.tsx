@@ -32,7 +32,7 @@ export default function Logs() {
       try {
         setPageChangeLoader(true);
         const response = await axios.get(
-          `http://localhost:3000/api/v1/log/bulk?perPage=${perPage}&page=${page}&filterEmployees=${filterselectedEmployees}&filterDevices=${filterselectedDevices}&filterDate=${filterDate}`
+          `${import.meta.env.VITE_BACKEND_URL}/api/v1/log/bulk?perPage=${perPage}&page=${page}&filterEmployees=${filterselectedEmployees}&filterDevices=${filterselectedDevices}&filterDate=${filterDate}`
         );
         setLogs(response.data.logs);
         setTotalLogs(response.data.totalLogs);

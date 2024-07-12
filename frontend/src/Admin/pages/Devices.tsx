@@ -28,7 +28,7 @@ export default function Devices() {
       setPageChangeLoader(true)
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/v1/admin/device/bulk?perPage=${perPage}&page=${page}&filter=${debouncedFilter}`,
+          `${import.meta.env.VITE_BACKEND_URL}/api/v1/admin/device/bulk?perPage=${perPage}&page=${page}&filter=${debouncedFilter}`,
           {
             headers: {
               Authorization: `${localStorage.getItem("token")}`,

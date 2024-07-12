@@ -121,6 +121,7 @@ exports.userRouter.post('/bookDevice/:id', user_1.userAuth, (req, res) => __awai
         }
         device.isBooked = true;
         device.bookedBy = userId;
+        device.bookedDate = new Date();
         yield device.save();
         const user = yield Employee_1.Employee.findById(userId);
         if (user) {

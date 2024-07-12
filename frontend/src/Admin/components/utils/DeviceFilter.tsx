@@ -21,7 +21,7 @@ export default function ({
     async function getData() {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/v1/admin/device/models`
+          `${import.meta.env.VITE_BACKEND_URL}/api/v1/admin/device/models`
         );
         setModels(response.data.models);
         setLoading(false);

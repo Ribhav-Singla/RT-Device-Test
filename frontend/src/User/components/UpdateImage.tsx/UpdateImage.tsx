@@ -41,7 +41,7 @@ export default function () {
       formData.append("file", image);
       try {
         const response = await axios.post(
-          `http://localhost:3000/api/v1/uploadImage`,
+          `${import.meta.env.VITE_BACKEND_URL}/api/v1/uploadImage`,
           formData,
           {
             headers: {
@@ -68,7 +68,7 @@ export default function () {
       formData.append("image", imageURL);
       const response = await axios.put(
         //@ts-ignore
-        `http://localhost:3000/api/v1/user/updateProfile/${user._id}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/user/updateProfile/${user._id}`,
         formData,
         {
           headers: {
@@ -117,7 +117,7 @@ export default function () {
                       />
                     ) : (
                       <img
-                        src={`http://localhost:3000/${image}`}
+                        src={`${import.meta.env.VITE_BACKEND_URL}/${image}`}
                         alt="preview not available"
                         className="object-contain max-h-[160px]"
                       />

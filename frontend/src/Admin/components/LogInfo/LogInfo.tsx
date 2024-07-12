@@ -56,7 +56,7 @@ export default function ({
     setBtnLoader(true);
     try {
       const response = await axios.put(
-        `http://localhost:3000/api/v1/admin/log/updateStatus/${log._id}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/admin/log/updateStatus/${log._id}`,
         {
           status,
         },
@@ -96,7 +96,7 @@ export default function ({
                 //@ts-ignore
                 log.employee.image
                   ? //@ts-ignore
-                    `http://localhost:3000/${log.employee.image}`
+                    `${import.meta.env.VITE_BACKEND_URL}/${log.employee.image}`
                   : "https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?size=338&ext=jpg&ga=GA1.1.2113030492.1720051200&semt=ais_user"
               }
               alt="Employee Image"
@@ -122,7 +122,7 @@ export default function ({
               src={
                 //@ts-ignore
                 log.device.image
-                  ? `http://localhost:3000/${log.device.image}`
+                  ? `${import.meta.env.VITE_BACKEND_URL}/${log.device.image}`
                   : Device
               }
               alt="Device Image"

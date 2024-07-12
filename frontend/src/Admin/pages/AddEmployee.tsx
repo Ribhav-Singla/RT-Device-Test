@@ -34,7 +34,7 @@ export default function AddEmployee() {
       formData.append("file", image);
       try {
         const response = await axios.post(
-          `http://localhost:3000/api/v1/uploadImage`,
+          `${import.meta.env.VITE_BACKEND_URL}/api/v1/uploadImage`,
           formData,
           {
             headers: {
@@ -64,7 +64,7 @@ export default function AddEmployee() {
     formData.append("image", imageURL);
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/v1/admin/employee/create",
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/admin/employee/create`,
         formData,
         {
           headers: {

@@ -29,7 +29,7 @@ export default function AddDevice() {
       formData.append("file", image);
       try {
         const response = await axios.post(
-          `http://localhost:3000/api/v1/uploadImage`,
+          `${import.meta.env.VITE_BACKEND_URL}/api/v1/uploadImage`,
           formData,
           {
             headers: {
@@ -49,15 +49,15 @@ export default function AddDevice() {
   };
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    const imageURL = await uploadImage()
-    const formData = new FormData();
-    formData.append("model", data.model);
-    formData.append("company", data.company);
-    formData.append("image", imageURL);  
     try {
       setBtnLoader(true);
+      const imageURL = await uploadImage()
+      const formData = new FormData();
+      formData.append("model", data.model);
+      formData.append("company", data.company);
+      formData.append("image", imageURL);  
       const response = await axios.post(
-        "http://localhost:3000/api/v1/admin/device/create",
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/admin/device/create`,
         formData,
         {
           headers: {

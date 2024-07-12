@@ -35,7 +35,7 @@ export default function () {
     try {
       setBtnLoader(true);
       const response = await axios.put(
-        `http://localhost:3000/api/v1/admin/employee/changePassword/${id}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/admin/employee/changePassword/${id}`,
         formData,
         {
           headers: {

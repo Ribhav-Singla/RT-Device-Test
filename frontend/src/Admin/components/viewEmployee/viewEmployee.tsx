@@ -12,7 +12,7 @@ export default function ViewEmployee() {
     async function getData() {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/v1/admin/employee/${id}`,
+          `${import.meta.env.VITE_BACKEND_URL}/api/v1/admin/employee/${id}`,
           {
             headers: {
               Authorization: `${localStorage.getItem("token")}`,
@@ -45,13 +45,13 @@ export default function ViewEmployee() {
               //@ts-ignore
               employee.image ? (
                 <img
-                  src={`http://localhost:3000/${employee.image}`}
+                  src={`${import.meta.env.VITE_BACKEND_URL}/${employee.image}`}
                   alt="Employee Image"
                   className="object-contain rounded-xl max-h-[250px]"
                 />
               ) : (
                 <img
-                  src="https://static.vecteezy.com/system/resources/previews/026/960/752/non_2x/invalid-user-profile-important-caution-notice-of-personal-fake-account-internet-person-id-and-fraud-risk-data-alert-male-user-warning-icon-illustration-filled-outline-style-eps10-vector.jpg"
+                  src="https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?size=338&ext=jpg&ga=GA1.1.2113030492.1720051200&semt=ais_user"
                   alt="Employee Image"
                   className="object-contain rounded-xl max-h-[200px]"
                 />

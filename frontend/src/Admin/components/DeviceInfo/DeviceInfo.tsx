@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { TfiEye } from "react-icons/tfi";
+import Device from "/Device.png";
 
 export default function DeviceInfo({
   id,
@@ -29,7 +30,7 @@ export default function DeviceInfo({
     setDeleteBtnLoader(true);
     try {
       const response = await axios.delete(
-        `http://localhost:3000/api/v1/admin/device/delete/${id}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/admin/device/delete/${id}`,
         {
           headers: {
             Authorization: `${localStorage.getItem("token")}`,
@@ -63,8 +64,8 @@ export default function DeviceInfo({
             <img
               src={
                 image
-                  ? `http://localhost:3000/${image}`
-                  : "https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvdjExNTctMDYzLWEtbDEzMmZlNGsuanBn.jpg"
+                  ? `${import.meta.env.VITE_BACKEND_URL}/${image}`
+                  : Device
               }
               alt="Device Image"
               className="rounded object-contain max-h-[45px]"

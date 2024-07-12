@@ -1,7 +1,7 @@
 import { io } from 'socket.io-client'
 import { atom, selector } from 'recoil';
 
-const URL = `http://localhost:3000`
+const URL = `${import.meta.env.VITE_BACKEND_URL}`
 export const socket = io(URL);
 
 export const socketState = atom({

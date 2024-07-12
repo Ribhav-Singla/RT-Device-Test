@@ -21,7 +21,7 @@ export default function AdminSignin() {
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
       const response = await axios.post(
-        `http://localhost:3000/api/v1/admin/auth/signin`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/admin/auth/signin`,
         {
           email: data.email,
           password: data.password,

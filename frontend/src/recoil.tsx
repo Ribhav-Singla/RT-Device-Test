@@ -8,7 +8,7 @@ export const userAtom = atom({
         key: 'userAtomSelector',
         get: async ({ get }) => {
             try {
-                const response = await axios.get('http://localhost:3000/api/v1/user/me', {
+                const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/me`, {
                     headers: {
                         'Authorization': `Bearer ${sessionStorage.getItem('userLoginAllowed') ? sessionStorage.getItem('userLoginToken') : localStorage.getItem("token")}`,
                     }

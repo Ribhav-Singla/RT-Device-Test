@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Spinner from "../../../Common/Spinner";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import Device from "/Device.png";
 
 export default function ViewDevice() {
   const { id } = useParams();
@@ -14,7 +15,7 @@ export default function ViewDevice() {
     async function getData() {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/v1/admin/device/${id}`,
+          `${import.meta.env.VITE_BACKEND_URL}/api/v1/admin/device/${id}`,
           {
             headers: {
               Authorization: `${localStorage.getItem("token")}`,
@@ -45,7 +46,7 @@ export default function ViewDevice() {
       <div className="bg-eerieBlack h-[250px] w-[250px] rounded-xl flex justify-center items-center">
         {
             //@ts-ignore
-            device.image ? <img src={`http://localhost:3000/${device.image}`} alt="Device Image" className="object-contain rounded-xl max-h-[250px]" /> : <img src="https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvdjExNTctMDYzLWEtbDEzMmZlNGsuanBn.jpg" alt="Device Image" className="object-contain rounded-xl max-h-[200px]" />
+            device.image ? <img src={`${import.meta.env.VITE_BACKEND_URL}/${device.image}`} alt="Device Image" className="object-contain rounded-xl max-h-[250px]" /> : <img src={Device} alt="Device Image" className="object-contain rounded-xl max-h-[200px]" />
         }
       </div>
       <div className="flex justify-center items-center gap-28">

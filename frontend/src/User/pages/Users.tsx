@@ -8,13 +8,13 @@ export default function Users() {
   const [users, setUsers] = useState([]);
   const [filter,setFilter] = useState('')
 
-  const debounceFilter = useDebouce(filter,500)
-
+  const debounceFilter = useDebouce(filter,500) 
+  
   useEffect(() => {
     async function getData() {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/v1/user/users?filter=${debounceFilter}`
+          `${import.meta.env.VITE_BACKEND_URL}/api/v1/user/users?filter=${debounceFilter}`
         );
         setUsers(response.data.users);
       } catch (error) {

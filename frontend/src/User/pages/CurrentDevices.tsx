@@ -98,7 +98,7 @@ export default function CurrentDevices() {
                         <div className="max-w-[60px] max-h-[60px] flex justify-center items-center rounded">
                           <img
                             //@ts-ignore
-                            src={log.device.image ? `http://localhost:3000/${log.device.image}` : Device}
+                            src={log.device.image ? `${import.meta.env.VITE_BACKEND_URL}/${log.device.image}` : Device}
                             alt="Device Image"
                             className="object-contain max-h-[80px] rounded"
                           />

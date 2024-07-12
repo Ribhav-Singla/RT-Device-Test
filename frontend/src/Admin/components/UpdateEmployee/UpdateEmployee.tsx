@@ -31,7 +31,7 @@ export default function () {
     async function getData() {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/v1/admin/employee/${id}`,
+          `${import.meta.env.VITE_BACKEND_URL}/api/v1/admin/employee/${id}`,
           {
             headers: {
               Authorization: `${localStorage.getItem("token")}`,
@@ -55,7 +55,7 @@ export default function () {
       formData.append("file", image);
       try {
         const response = await axios.post(
-          `http://localhost:3000/api/v1/uploadImage`,
+          `${import.meta.env.VITE_BACKEND_URL}/api/v1/uploadImage`,
           formData,
           {
             headers: {
@@ -83,7 +83,7 @@ export default function () {
     formData.append("image", imageURL);
 
       const response = await axios.put(
-        `http://localhost:3000/api/v1/admin/employee/update/${id}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/admin/employee/update/${id}`,
         formData,
         {
           headers: {
@@ -202,7 +202,7 @@ export default function () {
                         />
                       ) : (
                         <img
-                          src={`http://localhost:3000/${image}`}
+                          src={`${import.meta.env.VITE_BACKEND_URL}/${image}`}
                           alt="preview not available"
                           className="object-contain max-h-[105px]"
                         />

@@ -34,7 +34,7 @@ export default function OnlineDevice({name,model,company,empImage,deviceImage,bo
         <div className="flex-col justify-center items-center p-4 w-fit">
           <div className="w-[120px] h-[120px] flex justify-center items-center rounded-full image-box">
             <img
-              src={ empImage ? `http://localhost:3000/${empImage}` : "https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?size=338&ext=jpg&ga=GA1.1.2113030492.1720051200&semt=ais_user" }
+              src={ empImage ? `${import.meta.env.VITE_BACKEND_URL}/${empImage}` : "https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?size=338&ext=jpg&ga=GA1.1.2113030492.1720051200&semt=ais_user" }
               alt="Employee Image"
               className="text-center object-contain rounded-full max-h-[120px]"
             />
@@ -51,7 +51,7 @@ export default function OnlineDevice({name,model,company,empImage,deviceImage,bo
         <div className="flex-col justify-center items-center p-4 w-fit">
           <div className="w-[120px] h-[120px] flex justify-center items-center rounded-full image-box">
             <img
-              src={deviceImage ? `http://localhost:3000/${deviceImage}` :Device}
+              src={deviceImage ? `${import.meta.env.VITE_BACKEND_URL}/${deviceImage}` :Device}
               alt="Device Image"
               className="text-center object-contain rounded-full max-h-[120px]"
             />
