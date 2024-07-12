@@ -15,10 +15,10 @@ mongoose.connect('mongodb+srv://ribhavsingla:65fRLQQa1jKtstQr@cluster0.fb6ouk3.m
 
 const PORT = process.env.PORT || 3000
 const app = express()
+app.use(cors())
 const server = createServer(app)
 intializeSocket(server)
 
-app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static('uploads/'))
