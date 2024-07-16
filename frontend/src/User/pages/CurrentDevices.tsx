@@ -170,7 +170,7 @@ export default function CurrentDevices() {
                 </Table.HeadCell>
               </Table.Head>
               <Table.Body>
-                {mylogs.map((log) => {
+                {mylogs.length>0 ? mylogs.map((log) => {
                   //@ts-ignore
                     
                       return (
@@ -213,7 +213,13 @@ export default function CurrentDevices() {
                         </Table.Row>
                       );
                     
-                })}
+                }) :
+                <Table.Row>
+                  <Table.Cell colSpan={5}>
+                    <p className="text-center text-2xl">No logs!</p>
+                  </Table.Cell>
+                </Table.Row>
+                }
               </Table.Body>
             </Table>
           </div>

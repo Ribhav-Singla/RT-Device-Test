@@ -44,9 +44,14 @@ export default function AdminSignin() {
     <>
       <div className="flex items-center justify-center min-h-screen">
         <div className="flex-col justify-center items-center">
-          <div className="flex justify-center items-center gap-5 mb-10">
-            <img src={Logo} alt="Logo" className="max-w-[80px]" />
-            <h1 className="text-floralWhite text-5xl font-extrabold">Esfersoft Solutions</h1>
+          <div className="flex-col justify-center items-center gap-5 mb-10">
+            <div className="flex justify-center items-center gap-5">
+              <img src={Logo} alt="Logo" className="max-w-[80px]" />
+              <h1 className="text-floralWhite text-5xl font-extrabold">Esfersoft Solutions</h1>
+            </div>
+            <div className="flex justify-center items-center">
+              <p className="text-2xl text-floralWhite font-semibold">Inpiring <span className="text-blue-500">Digital</span> Excellence</p>
+            </div>
           </div>
           <div className="border-2 mx-7 rounded min-w-[350px] md:w-[450px] flex flex-col justify-center items-center pb-5 container bg-blackOlive">
             <h1 className="font-bold text-3xl text-slate-700 mb-2 pt-5 text-floralWhite">
