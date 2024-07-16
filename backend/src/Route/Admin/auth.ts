@@ -6,6 +6,19 @@ import { adminAuth } from "../../Middleware/admin"
 
 export const authRouter = express.Router()
 
+authRouter.get('/me',adminAuth,async(req,res)=>{
+    try {
+        return res.status(200).json({
+            message:"success"
+        })        
+    } catch (error) {
+        console.log('error occured in admin me: ',error);
+        return res.status(500).json({
+            message:'Internal Server Error'
+        })
+    }
+})
+
 authRouter.post('/signin', async (req, res) => {
     try {
         const admin = await Admin.findOne({

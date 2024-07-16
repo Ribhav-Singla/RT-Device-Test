@@ -13,11 +13,9 @@ export const socketState = atom({
             let token:string | null = ""
             if(sessionStorage.getItem('userLoginAllowed') && sessionStorage.getItem('userLoginToken')){
                 token = sessionStorage.getItem('userLoginToken')
-                console.log('sesiontoken: ',token);
             }
             else{
                 token = localStorage.getItem('token')
-                console.log('localtoken: ',token);
             }
 
             if (token) {

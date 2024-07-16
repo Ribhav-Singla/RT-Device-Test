@@ -7,7 +7,6 @@ import toast from "react-hot-toast";
 import { FaRegEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { MdUploadFile } from "react-icons/md";
 
 type Inputs = {
   name: string;
@@ -107,6 +106,7 @@ export default function AddEmployee() {
                 </label>
                 <input
                   {...register("name", { required: "Name is required!" })}
+                  autoFocus={true}
                   placeholder="Ribhav Singla"
                   className="w-full pl-2 bg-eerieBlack text-floralWhite"
                 />

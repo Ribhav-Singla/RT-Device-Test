@@ -5,7 +5,6 @@ import axios from "axios";
 import Spinner from "../../../Common/Spinner";
 import { useParams, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { MdUploadFile } from "react-icons/md";
 
 type Inputs = {
   name: string;
@@ -119,7 +118,10 @@ export default function () {
         <div className="flex flex-col justify-center items-center rounded md:max-w-[450px] lg:max-w-[600px] w-full px-3 pb-5 bg-blackOlive">
           <div className=" p-3 mb-5 text-center w-full">
             <h1 className="text-2xl font-bold w-full text-floralWhite">
-              Update {employeeData.name} info
+              Update {
+                //@ts-ignore
+              employeeData.name
+              } info
             </h1>
           </div>
           <div className="w-full">

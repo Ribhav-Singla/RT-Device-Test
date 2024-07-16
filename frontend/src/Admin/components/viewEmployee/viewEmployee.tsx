@@ -45,6 +45,7 @@ export default function ViewEmployee() {
               //@ts-ignore
               employee.image ? (
                 <img
+                  //@ts-ignore
                   src={`${import.meta.env.VITE_BACKEND_URL}/${employee.image}`}
                   alt="Employee Image"
                   className="object-contain rounded-xl max-h-[250px]"
@@ -76,10 +77,14 @@ export default function ViewEmployee() {
                 <h1 className="text-blue-500">CreatedAt:</h1>
                 {/* @ts-ignore */}
                 <span className="text-4xl font-extrabold mt-1 text-floralWhite">
-                  {new Date(employee.createdAt)
+                  {
+                    //@ts-ignore
+                  new Date(employee.createdAt)
                     .toDateString()
                     .replace(/^\S+\s/, "")}{" "}
-                  at {new Date(employee.createdAt).toLocaleTimeString()}
+                  at {
+                    //@ts-ignore
+                  new Date(employee.createdAt).toLocaleTimeString()}
                 </span>
                 <span className="text-4xl font-extrabold mt-1"></span>
               </div>
@@ -87,7 +92,10 @@ export default function ViewEmployee() {
                 <h1 className="text-blue-500">Devices:</h1>
                 {/* @ts-ignore */}
                 <p className="text-4xl font-extrabold mt-1 text-floralWhite">
-                  {employee.devices.length}
+                  {
+                    //@ts-ignore
+                    employee.devices.length
+                  }
                 </p>
               </div>
             </div>

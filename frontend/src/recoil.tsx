@@ -6,6 +6,7 @@ export const userAtom = atom({
     key: 'userAtom',
     default: selector({
         key: 'userAtomSelector',
+        //@ts-ignore
         get: async ({ get }) => {
             try {
                 const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/me`, {

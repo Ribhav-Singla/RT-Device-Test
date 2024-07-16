@@ -10,16 +10,23 @@ import useDebouce from "../../hooks/useDebounce";
 import Pager from "../../Common/Pager";
 import { FaUserPlus } from "react-icons/fa6";
 
+interface Employee {
+  id: string;
+  name: string;
+  email: string;
+  image: string;
+}
+
 export default function Employees() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [pageChangeLoader, setPageChangeLoader] = useState(false);
-  const [employees, setEmployees] = useState([]);
+  const [employees, setEmployees] = useState<Employee[]>([]);
   const [totalEmployee, setTotalEmployee] = useState(0);
   const [toggleRender, setToggleRender] = useState(false);
   const [filter, setFilter] = useState("");
   const [page, setPage] = useState(1);
-  const [perPage,setPerPage] = useState(5) 
+  const [perPage, setPerPage] = useState(5);
 
   const debouncedFilter = useDebouce(filter, 500);
 
@@ -28,13 +35,15 @@ export default function Employees() {
       setPageChangeLoader(true);
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}/api/v1/admin/employee/bulk?perPage=${perPage}&page=${page}&filter=${debouncedFilter}`,
+          `${
+            import.meta.env.VITE_BACKEND_URL
+          }/api/v1/admin/employee/bulk?perPage=${perPage}&page=${page}&filter=${debouncedFilter}`,
           {
             headers: {
               Authorization: `${localStorage.getItem("token")}`,
             },
           }
-        );        
+        );
         setEmployees(response.data.employees);
         setTotalEmployee(response.data.totalEmployee);
         await new Promise((r) => setTimeout(r, 500));
@@ -85,11 +94,11 @@ export default function Employees() {
                 className="absolute top-3 left-[85%]"
               />
             </div>
-            <div className="border bg-blackOlive text-floralWhite p-3 rounded-lg flex justify-center items-center cursor-pointer">
-              <Link to={`/admin/addEmployee`}>
-                <FaUserPlus  size={20}/>
-              </Link>
-            </div>
+            <Link to={`/admin/addEmployee`}>
+              <div className="border bg-blackOlive text-floralWhite p-3 rounded-lg flex justify-center items-center cursor-pointer">
+                <FaUserPlus size={20} />
+              </div>
+            </Link>
           </div>
         </div>
         <Table striped className="w-full">
@@ -131,7 +140,9 @@ export default function Employees() {
                 {employees.map((employee, index) => {
                   return (
                     <EmployeeInfo
+                    //@ts-ignore
                       id={employee._id}
+                      //@ts-ignore
                       key={employee._id}
                       index={perPage * (page - 1) + index}
                       name={employee.name}
@@ -149,10 +160,14 @@ export default function Employees() {
           <div className="flex justify-between items-center">
             <div className="flex justify-center items-center gap-2 pt-1">
               <p className="text-flame">per page.</p>
-              <select className="rounded-lg p-[5px] mt-1" value={perPage} onChange={(e)=>{
-                setPerPage(Number(e.target.value))
-                setPage(1)
-              }}>
+              <select
+                className="rounded-lg p-[5px] mt-1"
+                value={perPage}
+                onChange={(e) => {
+                  setPerPage(Number(e.target.value));
+                  setPage(1);
+                }}
+              >
                 <option value={5}>5</option>
                 <option value={10}>10</option>
                 <option value={20}>20</option>

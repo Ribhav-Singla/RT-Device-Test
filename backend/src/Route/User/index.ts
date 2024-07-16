@@ -10,6 +10,19 @@ import { getAdminDevices, getDevices, myDevices } from '../socket';
 
 export const userRouter = express.Router()
 
+userRouter.get('/routeProtect',userAuth,async(req,res)=>{
+    try {
+        return res.status(200).json({
+            message:"success"
+        })
+    } catch (error) {
+        console.log('error occured while user route protect: ',error);
+        return res.status(500).json({
+            message:'Internal Server Error'
+        })
+    }
+})
+
 userRouter.get('/me', userAuth, async (req, res) => {
     try {
         //@ts-ignore

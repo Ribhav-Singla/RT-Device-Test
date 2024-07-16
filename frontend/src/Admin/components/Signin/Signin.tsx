@@ -12,6 +12,7 @@ type Inputs = {
 export default function AdminSignin() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [btnLoader,setBtnLoader] = useState(false);
   const {
     register,
     handleSubmit,
@@ -20,6 +21,7 @@ export default function AdminSignin() {
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
+      setBtnLoader(true);
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/v1/admin/auth/signin`,
         {
@@ -27,13 +29,14 @@ export default function AdminSignin() {
           password: data.password,
         }
       );
-
+      setBtnLoader(false);
       localStorage.setItem("token", `Bearer ${response.data.token}`);
       toast.success("signed in successfully!");
       navigate("/admin");
     } catch (error) {
       //@ts-ignore
       toast.error(error.response.data.message);
+      setBtnLoader(false);
     }
   };
   return (
@@ -126,7 +129,7 @@ export default function AdminSignin() {
                   type="submit"
                   className="bg-timerWolf rounded text-black text-lg font-semibold px-5 py-2 w-[40%]"
                 >
-                  Signin
+                  {btnLoader ? 'Please wait...' : 'Signin'}
                 </button>
               </div>
             </form>

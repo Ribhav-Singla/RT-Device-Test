@@ -1,8 +1,7 @@
 import { Table } from "flowbite-react";
 import { RiDeleteBin4Line } from "react-icons/ri";
 import { FiEdit } from "react-icons/fi";
-import { useState } from "react";
-import { VscPreview } from "react-icons/vsc";
+import { Dispatch, SetStateAction, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { TfiEye } from "react-icons/tfi";
@@ -22,7 +21,7 @@ export default function EmployeeInfo({
   name: string;
   email: string;
   image: string;
-  setToogleRender: () => void;
+  setToggleRender: Dispatch<SetStateAction<boolean>>;
 }) {
   const navigate = useNavigate();
   const [isDelete, setIsDelete] = useState(false);

@@ -96,6 +96,7 @@ export default function AddDevice() {
                 </label>
                 <input
                   {...register("model", { required: "Model is required!" })}
+                  autoFocus={true}
                   placeholder="M-53"
                   className="w-full pl-2 text-floralWhite bg-eerieBlack"
                 />
@@ -120,7 +121,7 @@ export default function AddDevice() {
                         //@ts-ignore
                         src={URL.createObjectURL(image)}
                         alt="preview"
-                        className="rounded"
+                        className="rounded max-h-[112px]"
                         object-contain
                       />
                     ) : (

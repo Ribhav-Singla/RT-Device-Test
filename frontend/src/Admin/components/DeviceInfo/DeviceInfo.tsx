@@ -1,7 +1,7 @@
 import { Table } from "flowbite-react";
 import { RiDeleteBin4Line } from "react-icons/ri";
 import { FiEdit } from "react-icons/fi";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { TfiEye } from "react-icons/tfi";
@@ -20,7 +20,7 @@ export default function DeviceInfo({
   model: string;
   company: string;
   image: string;
-  setToggleRender: () => void;
+  setToggleRender: Dispatch<SetStateAction<boolean>>;
 }) {
   const navigate = useNavigate();
   const [isDelete, setIsDelete] = useState(false);
@@ -29,7 +29,7 @@ export default function DeviceInfo({
   const handleDelete = async () => {
     setDeleteBtnLoader(true);
     try {
-      const response = await axios.delete(
+      await axios.delete(
         `${import.meta.env.VITE_BACKEND_URL}/api/v1/admin/device/delete/${id}`,
         {
           headers: {

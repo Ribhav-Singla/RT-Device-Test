@@ -18,6 +18,7 @@ export default function UserSignin({ id ,setShowSignin }: { id :string,setShowSi
   const {
     register,
     handleSubmit,
+    //@ts-ignore
     formState: { errors },
   } = useForm<Inputs>();
 

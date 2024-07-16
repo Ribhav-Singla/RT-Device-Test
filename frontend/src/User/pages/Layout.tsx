@@ -12,9 +12,7 @@ export default function Layout() {
 
   useEffect(() => {
     if (userLoadable.state === "hasValue") {
-      setUser(userLoadable.contents);
-      console.log(userLoadable.contents);
-      
+      setUser(userLoadable.contents);     
     }
   }, [userLoadable]);
 
@@ -37,7 +35,9 @@ export default function Layout() {
               //@ts-ignore
               user && user.name ? (
                 <div className=" bg-blue-500 px-4 py-2 text-white font-bold text-xl rounded-full">
-                  <p>{user.name[0].toUpperCase()}</p>
+                  <p>{
+                    //@ts-ignore
+                  user.name[0].toUpperCase()}</p>
                 </div>
               ) : (
                 <Avatar

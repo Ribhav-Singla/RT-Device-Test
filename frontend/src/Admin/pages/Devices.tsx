@@ -10,25 +10,34 @@ import useDebouce from "../../hooks/useDebounce";
 import Pager from "../../Common/Pager";
 import { TbDeviceMobilePlus } from "react-icons/tb";
 
+interface Device{
+  id: string,
+  company: string,
+  model: string,
+  image: string,
+}
+
 export default function Devices() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [pageChangeLoader, setPageChangeLoader] = useState(false);
-  const [devices, setDevices] = useState([]);
+  const [devices, setDevices] = useState<Device[]>([]);
   const [totalDevice, setTotalDevice] = useState(0);
   const [toggleRender, setToggleRender] = useState(false);
   const [filter, setFilter] = useState("");
   const [page, setPage] = useState(1);
-  const [perPage,setPerPage] = useState(5)  
+  const [perPage, setPerPage] = useState(5);
 
   const debouncedFilter = useDebouce(filter, 500);
 
   useEffect(() => {
     async function getData() {
-      setPageChangeLoader(true)
+      setPageChangeLoader(true);
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}/api/v1/admin/device/bulk?perPage=${perPage}&page=${page}&filter=${debouncedFilter}`,
+          `${
+            import.meta.env.VITE_BACKEND_URL
+          }/api/v1/admin/device/bulk?perPage=${perPage}&page=${page}&filter=${debouncedFilter}`,
           {
             headers: {
               Authorization: `${localStorage.getItem("token")}`,
@@ -39,7 +48,7 @@ export default function Devices() {
         setTotalDevice(response.data.totalDevices);
         await new Promise((r) => setTimeout(r, 500));
         setLoading(false);
-        setPageChangeLoader(false)
+        setPageChangeLoader(false);
       } catch (error) {
         console.log("error in devices: ", error);
         //@ts-ignore
@@ -51,7 +60,7 @@ export default function Devices() {
       }
     }
     getData();
-  }, [toggleRender, debouncedFilter, page,perPage]);
+  }, [toggleRender, debouncedFilter, page, perPage]);
 
   if (loading) {
     return (
@@ -84,11 +93,11 @@ export default function Devices() {
                 className="absolute top-3 left-[85%]"
               />
             </div>
-            <div className="border bg-blackOlive text-floralWhite p-3 rounded flex justify-center items-center cursor-pointer">
-                <Link to={`/admin/addDevice`}>
-                  <TbDeviceMobilePlus  size={20}/>
-                </Link>
-            </div>
+            <Link to={`/admin/addDevice`}>
+              <div className="border bg-blackOlive text-floralWhite p-3 rounded flex justify-center items-center cursor-pointer">
+                <TbDeviceMobilePlus size={20} />
+              </div>
+            </Link>
           </div>
         </div>
         <Table striped className="w-full">
@@ -105,9 +114,7 @@ export default function Devices() {
             <Table.HeadCell className="text-base bg-blackOlive text-flame">
               Image
             </Table.HeadCell>
-            <Table.HeadCell
-              className="text-base text-center bg-blackOlive text-flame"
-            >
+            <Table.HeadCell className="text-base text-center bg-blackOlive text-flame">
               Actions
             </Table.HeadCell>
           </Table.Head>
@@ -126,13 +133,14 @@ export default function Devices() {
                 {devices.map((device, index) => {
                   return (
                     <DeviceInfo
+                    //@ts-ignore
                       id={device._id}
+                      //@ts-ignore
                       key={device._id}
                       index={perPage * (page - 1) + index}
                       model={device.model}
                       company={device.company}
                       image={device.image}
-                      //@ts-ignore
                       setToggleRender={setToggleRender}
                     />
                   );
@@ -145,10 +153,14 @@ export default function Devices() {
           <div className="flex justify-between items-center">
             <div className="flex justify-center items-center gap-2 pt-1">
               <p className="text-flame">per page.</p>
-              <select className="rounded-lg p-[5px] mt-1" value={perPage} onChange={(e)=>{
-                setPerPage(Number(e.target.value))
-                setPage(1)
-              }}>
+              <select
+                className="rounded-lg p-[5px] mt-1"
+                value={perPage}
+                onChange={(e) => {
+                  setPerPage(Number(e.target.value));
+                  setPage(1);
+                }}
+              >
                 <option value={5}>5</option>
                 <option value={10}>10</option>
                 <option value={20}>20</option>

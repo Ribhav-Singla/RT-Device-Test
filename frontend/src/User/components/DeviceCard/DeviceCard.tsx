@@ -22,7 +22,7 @@ export default function DeviceCard({ device }: { device: Device }) {
   const handleBook = async () => {
     try {
       setBtnLoader(true);
-      const response = await axios.post(
+      await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/v1/user/bookDevice/${device._id}`,
         {},
         {

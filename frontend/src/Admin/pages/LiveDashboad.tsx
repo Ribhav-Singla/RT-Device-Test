@@ -2,7 +2,6 @@ import OnlineDevice from "../components/OnlineDevice/OnlineDevice";
 import { socket } from "../../socket";
 import { useEffect, useState } from "react";
 import Logs from "./Logs";
-import axios from "axios";
 
 export default function LiveDashboad() {
   const [adminDevices, setAdminDevices] = useState([]);
