@@ -1,13 +1,17 @@
 import { Link } from "react-router-dom";
 import Dropdown from "../Dropdown/Dropdown";
+import Logo from '/vite.png'
 
 export default function Sidebar(){
     return (
         <>
         <div className="grid col-span-3 lg:col-span-2 border-r-2 relative" style={{borderRightColor:"#CCC5B9"}}>
           <Link to='/admin'>
-            <h1 className="font-semibold p-3 border-b-2 h-fit cursor-pointer border-black bg-flame" style={{borderBottomColor:"#CCC5B9"}}>
-              Esferasoft
+            <h1 className="font-semibold p-3 border-b-2 h-fit cursor-pointer flex gap-3 items-center border-black bg-flame" style={{borderBottomColor:"#CCC5B9"}}>
+              <span>
+                  <img src={Logo} alt="Logo" className="max-w-[20px]" />
+              </span>
+              Esferasoft Device Admin
             </h1>
           </Link>
           <div className="absolute top-12 left-0 w-full" >

@@ -77,7 +77,8 @@ export default function () {
           </h1>
           <form onSubmit={handleSubmit(onSubmit)}>
             {/* old password */}
-            <div className="mb-5">
+            {
+              !resetPassword ? <div className="mb-5">
               <label className="text-black">Old password: </label>
               <br />
               <div className="relative">
@@ -88,7 +89,6 @@ export default function () {
                       : "Old password is required!",
                   })}
                   type={showOldPassword ? "text" : "password"}
-                  placeholder="ribhav-x"
                   className="w-full pl-2 text-eerieBlack border-none rounded-md bg-timerWolf"
                 />
                 <div
@@ -104,6 +104,8 @@ export default function () {
               </div>
               <p className="text-red-500">{errors.oldPassword?.message}</p>
             </div>
+            :""
+            }
 
             {/* New Password */}
             <div className="mb-5">
@@ -120,7 +122,6 @@ export default function () {
                     },
                   })}
                   type={showPassword ? "text" : "password"}
-                  placeholder="ribhav-x"
                   className="w-full pl-2 text-eerieBlack border-none rounded-md bg-timerWolf"
                 />
                 <div
@@ -157,7 +158,6 @@ export default function () {
                     },
                   })}
                   type={showConfirmPassword ? "text" : "password"}
-                  placeholder="ribhav-x"
                   className="w-full pl-2 text-eerieBlack border-none rounded-md  bg-timerWolf"
                 />
                 <div

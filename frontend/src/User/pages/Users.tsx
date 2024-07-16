@@ -7,6 +7,8 @@ import { v4 } from "uuid";
 
 export default function Users() {
   const [users, setUsers] = useState([]);
+  console.log(users);
+  
   const [filter,setFilter] = useState('')
 
   const debounceFilter = useDebouce(filter,500) 

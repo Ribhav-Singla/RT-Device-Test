@@ -1,7 +1,12 @@
+import axios from "axios";
 import Device from "/Device.png";
 import { motion } from "framer-motion";
+import { TiArrowBack } from "react-icons/ti";
+import toast from "react-hot-toast";
+import { useState } from "react";
 
-export default function OnlineDevice({name,model,company,empImage,deviceImage,bookedDate}:{
+export default function OnlineDevice({id,name,model,company,empImage,deviceImage,bookedDate}:{
+  id:string,
   name:string,
   model:string,
   company:string,
@@ -9,6 +14,35 @@ export default function OnlineDevice({name,model,company,empImage,deviceImage,bo
   deviceImage:string,
   bookedDate:string
 }) {
+
+  // handle the return device functionality
+  const [btnLoader, setBtnLoader] = useState(false);
+  const [isReturn, setIsReturn] = useState(false);
+
+  const handleReturn = async () => {
+    setBtnLoader(true);
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/admin/device/returnDevice/${id}`,
+        {},
+        {
+          headers: {
+            Authorization: `${localStorage.getItem("token")}`,
+            'Content-Type': 'application/json'
+          },
+        }
+      );
+      toast.success(response.data.message);
+      setBtnLoader(false);
+    } catch (error) {
+      console.log("error occured while return the device: ", error);
+      //@ts-ignore
+      toast.error(error.response.data.message);
+      setBtnLoader(false);
+    }
+  };
+
+
   return (
     <>
       <motion.div
@@ -31,6 +65,9 @@ export default function OnlineDevice({name,model,company,empImage,deviceImage,bo
         }}
         className="flex justify-center border-2 bg-blackOlive rounded-lg w-fit container cursor-pointer"
       >
+        <div className="p-1" onClick={()=>setIsReturn(!isReturn)}>
+          <TiArrowBack className="text-blue-500 cursor-pointer" size={35}/>
+        </div>
         <div className="flex-col justify-center items-center p-4 w-fit">
           <div className="w-[120px] h-[120px] flex justify-center items-center rounded-full image-box">
             <img
@@ -66,6 +103,39 @@ export default function OnlineDevice({name,model,company,empImage,deviceImage,bo
           </div>
         </div>
       </motion.div>
+      {isReturn ? (
+        <div className="overlay z-10">
+          <div className="whitespace-nowrap font-medium  text-base bg-blackOlive text-floralWhite text-center rounded-md py-5 px-5 delete-btn">
+            <p className="text-flame">
+              Are you sure you want to return this device?
+            </p>
+            <div>
+              <p>{model}</p>
+              <p>{company}</p>
+            </div>
+            <div className="flex justify-center items-center gap-5 cursor-pointer mt-4">
+              <span
+                className="text-blue-500 bg-eerieBlack py-2 px-4 rounded"
+                onClick={handleReturn}
+              >
+                {btnLoader ? "Returning..." : "Yes"}
+              </span>
+              {btnLoader ? (
+                ""
+              ) : (
+                <span
+                  className="text-red-600 bg-eerieBlack py-2 px-4 rounded"
+                  onClick={() => setIsReturn(!isReturn)}
+                >
+                  No
+                </span>
+              )}
+            </div>
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
     </>
   );
 }

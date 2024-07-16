@@ -1,18 +1,30 @@
 import { useEffect, useState } from "react";
 import CurrentDeviceCard from "../components/CurrentDeviceCard/CurrentDeviceCard";
-import { Table } from "flowbite-react";
+import { Datepicker, Table } from "flowbite-react";
 import { socket, socketState } from "../../socket";
 import { useRecoilValue } from "recoil";
 import { useNavigate } from "react-router-dom";
 import Device from "/Device.png";
 import { v4 } from "uuid";
+import { IoMdArrowDropdown } from "react-icons/io";
+import { IoMdArrowDropup } from "react-icons/io";
+import {motion} from 'framer-motion'
+import DeviceFilter from "../../Admin/components/utils/DeviceFilter";
 
 export default function CurrentDevices() {
   const navigate = useNavigate();
   const [devices, setDevices] = useState([]);
   const [mylogs, setMylogs] = useState([]);
-  const socketStatus = useRecoilValue(socketState);
+  const [originalLogs,setOriginalLogs] = useState([])
+
+  //@ts-ignore
+  const [page,setPage] = useState(1)
+  const [showDevice,setShowDevice] = useState(false);
+  const [showDate,setShowDate] = useState(false);
+  const [filterselectedDevices,setFilterSelectedDevices] = useState<String[]>([])
   
+  const [filterDate,setFilterDate] = useState("")  
+  const socketStatus = useRecoilValue(socketState);
   console.log("socket status at current devices: ", socketStatus);
 
   useEffect(() => {
@@ -21,9 +33,30 @@ export default function CurrentDevices() {
       socket.on("mydevice list", (data, mylogs) => {
         setDevices(data);
         setMylogs(mylogs);
+        setOriginalLogs(mylogs)
       });
     }
   }, []);
+
+  useEffect(()=>{
+    let filteredLogs = originalLogs;
+
+    if (filterselectedDevices.length > 0) {
+      //@ts-ignore
+      filteredLogs = filteredLogs.filter((log) => filterselectedDevices.includes(log.device._id));
+    }
+
+    if (filterDate) {
+      const selectedDate = new Date(filterDate).setHours(0, 0, 0, 0); // Set time to start of the day
+      filteredLogs = filteredLogs.filter((log) => {
+        //@ts-ignore
+        const logDate = new Date(log.createdAt).setHours(0, 0, 0, 0);
+        return logDate === selectedDate;
+      });
+    }
+
+    setMylogs(filteredLogs);
+  }, [filterDate, filterselectedDevices, mylogs]);
 
   return (
     <div className="bg-white">
@@ -64,10 +97,60 @@ export default function CurrentDevices() {
           </div>
         </div>
         <div className="col-span-7 bg-gray-100 border-l-2 border-black">
-          <h1 className="text-lg font-semibold p-1 pl-2 h-fit border-b-2 border-t-2 border-black">
-            History
-          </h1>
-          <div className="min-h-screen">
+         
+            <div className="flex justify-between">
+              <h1 className="text-lg font-semibold p-1 pl-2 h-fit border-b-2 w-full border-t-2 border-black">
+                History
+              </h1>
+              <div className="flex justify-center items-center gap-4 pr-2 border-b-2 border-t-2 border-black">
+                  <div className="flex justify-center items-center border-l-2 border-r-2 border-black rounded-lg py-1 px-3 gap-4 cursor-pointer" onClick={()=>{
+                    setShowDevice(!showDevice)
+                    if(showDate) setShowDate(false)
+                  }}>
+                      <h1 className="text-eerieBlack rounded-lg">Device</h1>
+                      {
+                        !showDevice ? <IoMdArrowDropdown size={25} className="text-eerieBlack"/> : <IoMdArrowDropup size={25} className="text-eerieBlack"/>
+                      }
+                  </div>
+                  <div className="flex justify-center items-center border-l-2 border-r-2 border-black rounded-lg gap-4 py-1 px-3 cursor-pointer" onClick={()=>{
+                    setShowDate(!showDate)
+                    if(showDevice) setShowDevice(false)
+                  }}>
+                      <h1 className="text-eerieBlack rounded-lg">Date</h1>
+                      {
+                        !showDate ? <IoMdArrowDropdown size={25} className="text-eerieBlack"/> : <IoMdArrowDropup size={25} className="text-eerieBlack"/>
+                      }
+                  </div>
+              </div>
+            </div>
+            <div className="absolute left-[80%] flex justify-end w-full">
+              {
+                //@ts-ignore
+                showDevice ? <DeviceFilter filterselectedDevices={filterselectedDevices} setFilterSelectedDevices={setFilterSelectedDevices} setPage={setPage}/> : ""
+              }
+              {
+                showDate ? 
+                <motion.div initial={{
+                  scale:0.5
+                }}
+                animate={{
+                  scale:1
+                }} className="max-w-[60%] mt-2 absolute top-0 left-0 z-10">
+                  <Datepicker 
+                    defaultValue={Date.now()}
+                    onSelectedDateChanged={
+                      //@ts-ignore
+                      (e:SetStateAction<string>)=>{
+                        setFilterDate(e)
+                      }
+                      
+                  }/>
+                </motion.div> 
+                : ""
+              }
+            </div>
+         
+          <div className="max-h-[800px] overflow-y-scroll">
             <Table striped className="w-full">
               <Table.Head>
                 <Table.HeadCell className="text-base text-center">
@@ -75,6 +158,9 @@ export default function CurrentDevices() {
                 </Table.HeadCell>
                 <Table.HeadCell className="text-base text-center">
                   Device
+                </Table.HeadCell>
+                <Table.HeadCell className="text-base text-center">
+                  Model
                 </Table.HeadCell>
                 <Table.HeadCell className="text-base text-center">
                   Login Time
@@ -85,39 +171,48 @@ export default function CurrentDevices() {
               </Table.Head>
               <Table.Body>
                 {mylogs.map((log) => {
-                  return (
-                    //@ts-ignore
-                    <Table.Row key={log._id + v4()}>
-                      <Table.Cell className="font-semibold text-center p-0">
-                        {
-                          //@ts-ignore
-                          new Date(log.createdAt).toDateString()
-                        }
-                      </Table.Cell>
-                      <Table.Cell className="font-semibold text-center flex justify-center items-center p-0 py-1">
-                        <div className="max-w-[60px] max-h-[60px] flex justify-center items-center rounded">
-                          <img
-                            //@ts-ignore
-                            src={log.device.image ? `${import.meta.env.VITE_BACKEND_URL}/${log.device.image}` : Device}
-                            alt="Device Image"
-                            className="object-contain max-h-[80px] rounded"
-                          />
-                        </div>
-                      </Table.Cell>
-                      <Table.Cell className="font-semibold text-center p-0">
-                        {
-                          //@ts-ignore
-                          new Date(log.loginTime).toLocaleTimeString()
-                        }
-                      </Table.Cell>
-                      <Table.Cell className="font-semibold text-center p-0">
-                        {
-                          //@ts-ignore
-                          log.logoutTime ? new Date(log.logoutTime).toLocaleTimeString() : "---"
-                        }
-                      </Table.Cell>
-                    </Table.Row>
-                  );
+                  //@ts-ignore
+                    
+                      return (
+                        //@ts-ignore
+                        <Table.Row key={log._id + v4()}>
+                          <Table.Cell className="font-semibold text-center p-0">
+                            {
+                              //@ts-ignore
+                              new Date(log.createdAt).toDateString()
+                            }
+                          </Table.Cell>
+                          <Table.Cell className="font-semibold text-center flex justify-center items-center p-0 py-1">
+                            <div className="max-w-[60px] max-h-[60px] flex justify-center items-center rounded">
+                              <img
+                                //@ts-ignore
+                                src={log.device.image ? `${import.meta.env.VITE_BACKEND_URL}/${log.device.image}` : Device}
+                                alt="Device Image"
+                                className="object-contain max-h-[80px] rounded"
+                              />
+                            </div>
+                          </Table.Cell>
+                          <Table.Cell className="font-semibold text-center p-0">
+                            {
+                              //@ts-ignore
+                              log.device.model
+                            }
+                          </Table.Cell>
+                          <Table.Cell className="font-semibold text-center p-0">
+                            {
+                              //@ts-ignore
+                              new Date(log.loginTime).toLocaleTimeString()
+                            }
+                          </Table.Cell>
+                          <Table.Cell className="font-semibold text-center p-0">
+                            {
+                              //@ts-ignore
+                              log.logoutTime ? new Date(log.logoutTime).toLocaleTimeString() : "---"
+                            }
+                          </Table.Cell>
+                        </Table.Row>
+                      );
+                    
                 })}
               </Table.Body>
             </Table>

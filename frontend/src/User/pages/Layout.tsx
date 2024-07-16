@@ -4,6 +4,7 @@ import { useRecoilValueLoadable } from "recoil";
 import { userAtom } from "../../recoil";
 import { Dropdown } from "flowbite-react";
 import { useEffect, useState } from "react";
+import Logo from '/vite.png'
 
 export default function Layout() {
   const userLoadable = useRecoilValueLoadable(userAtom);
@@ -19,14 +20,17 @@ export default function Layout() {
   return (
     <>
       <div className="flex justify-between items-center w-full bg-floralWhite p-2 border-b-2">
-        <button
-          className="bg-green-500 text-white text-md font-semibold p-2 rounded"
-          onClick={() => {
-            navigate("/user/currentDevices");
-          }}
-        >
-          Current Devices
-        </button>
+        <div className="flex justify-center items-center gap-5">
+          <img src={Logo} alt="Logo" className="max-w-[35px] max-h-[35px]"/>
+          <button
+            className="bg-green-500 text-white text-md font-semibold p-2 rounded"
+            onClick={() => {
+              navigate("/user/currentDevices");
+            }}
+          >
+            Home
+          </button>
+        </div>
         <div className="flex justify-center items-center gap-5">
           <Dropdown
             arrowIcon={false}

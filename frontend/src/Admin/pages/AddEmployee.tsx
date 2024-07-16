@@ -107,7 +107,6 @@ export default function AddEmployee() {
                 <input
                   {...register("name", { required: "Name is required!" })}
                   autoFocus={true}
-                  placeholder="Ribhav Singla"
                   className="w-full pl-2 bg-eerieBlack text-floralWhite"
                 />
                 <p className="text-red-500">{errors.name?.message}</p>
@@ -124,7 +123,6 @@ export default function AddEmployee() {
                       message: "Invalid email address",
                     },
                   })}
-                  placeholder="ribhav@example.com"
                   className="w-full pl-2 bg-eerieBlack text-floralWhite"
                 />
                 <p className="text-red-500">{errors.email?.message}</p>
@@ -145,7 +143,6 @@ export default function AddEmployee() {
                       },
                     })}
                     type={showPassword ? "text" : "password"}
-                    placeholder="ribhav-x"
                     className="w-full pl-2 bg-eerieBlack text-floralWhite border-none rounded-md "
                   />
                   <div

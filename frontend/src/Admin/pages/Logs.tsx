@@ -146,10 +146,10 @@ export default function Logs() {
               Device
             </Table.HeadCell>
             <Table.HeadCell className="text-base bg-blackOlive text-flame text-center">
-              Login Time
+              Login
             </Table.HeadCell>
             <Table.HeadCell className="text-base  bg-blackOlive text-flame text-center">
-              Logout Time
+              Logout
             </Table.HeadCell>
             <Table.HeadCell className="text-base  bg-blackOlive text-flame text-center">
               Status

@@ -34,6 +34,7 @@ function App() {
             {/* admin routes */}
             <Route path="/admin/signin" element={<AdminSignin />} />
             <Route path="/admin" element={<AdminProtected><AdminDashboard /></AdminProtected>}>
+              <Route path="" element={<LiveDashboad />} />
               <Route path="liveDashboard" element={<LiveDashboad />} />
               <Route path="addDevice" element={<AddDevice />} />
               <Route path="updateDevice/:id" element={<UpdateDevice />} />

@@ -133,7 +133,7 @@ export default function ({
         <Table.Cell className="whitespace-nowrap font-medium  text-base text-center bg-eerieBlack text-floralWhite">
           {
             //@ts-ignore
-            new Date(log.loginTime).toLocaleTimeString()
+            new Date(log.loginTime).toLocaleString()
           }
         </Table.Cell>
         <Table.Cell className="whitespace-nowrap font-medium  text-base text-center bg-eerieBlack text-floralWhite">
@@ -141,7 +141,7 @@ export default function ({
             //@ts-ignore
             log.logoutTime
               ? //@ts-ignore
-                new Date(log.logoutTime).toLocaleTimeString()
+                new Date(log.logoutTime).toLocaleString()
               : "---"
           }
         </Table.Cell>

@@ -63,6 +63,8 @@ export default function LiveDashboad() {
             //@ts-ignore
             return (
               <OnlineDevice
+                //@ts-ignore
+                id = {device._id}
                 key={index}
                 //@ts-ignore
                 name={device.bookedBy.name}
