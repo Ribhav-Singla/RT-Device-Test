@@ -49,8 +49,8 @@ export default function AdminSignin() {
               <img src={Logo} alt="Logo" className="max-w-[80px]" />
               <h1 className="text-floralWhite text-5xl font-extrabold">Esfersoft Solutions</h1>
             </div>
-            <div className="flex justify-center items-center">
-              <p className="text-2xl text-floralWhite font-semibold">Inpiring <span className="text-blue-500">Digital</span> Excellence</p>
+            <div className="flex justify-center items-center typewriter w-fit mx-auto">
+              <p className="text-2xl text-floralWhite font-semibold">Inspiring Digital Excellence</p>
             </div>
           </div>
           <div className="border-2 mx-7 rounded min-w-[350px] md:w-[450px] flex flex-col justify-center items-center pb-5 container bg-blackOlive">

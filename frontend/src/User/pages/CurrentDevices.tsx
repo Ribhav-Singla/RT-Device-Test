@@ -77,9 +77,9 @@ export default function CurrentDevices() {
         </div>
         <hr />
       </div>
-      <div className="grid grid-cols-12">
-        <div className="col-span-5">
-          <h1 className="text-lg font-semibold p-1 pl-2 h-fit border-b-2 border-t-2 border-black">
+      <div className="grid grid-cols-12 gap-x-5 p-5">
+        <div className="col-span-5 shadow-2xl rounded-lg">
+          <h1 className="text-lg font-extrabold p-3 pl-3 h-fit rounded-ss-lg rounded-se-lg  bg-gray-100">
             Current Devices
           </h1>
           <div className="min-h-screen flex justify-center items-start gap-5 px-2 py-4 flex-wrap">
@@ -96,13 +96,13 @@ export default function CurrentDevices() {
             }
           </div>
         </div>
-        <div className="col-span-7 bg-gray-100 border-l-2 border-black">
-         
-            <div className="flex justify-between">
-              <h1 className="text-lg font-semibold p-1 pl-2 h-fit border-b-2 w-full border-t-2 border-black">
+        <div className="col-span-7 bg-gray-100 shadow-2xl rounded-lg">
+      
+            <div className="flex justify-between p-2">
+              <h1 className="text-lg font-extrabold text-eerieBlack p-1 pl-2 h-fit w-full ">
                 History
               </h1>
-              <div className="flex justify-center items-center gap-4 pr-2 border-b-2 border-t-2 border-black">
+              <div className="flex justify-center items-center gap-4 pr-2 ">
                   <div className="flex justify-center items-center border-l-2 border-r-2 border-black rounded-lg py-1 px-3 gap-4 cursor-pointer" onClick={()=>{
                     setShowDevice(!showDevice)
                     if(showDate) setShowDate(false)
@@ -150,7 +150,7 @@ export default function CurrentDevices() {
               }
             </div>
          
-          <div className="max-h-[800px] overflow-y-scroll">
+          <div className="max-h-[800px] overflow-y-scroll rounded-lg">
             <Table striped className="w-full">
               <Table.Head>
                 <Table.HeadCell className="text-base text-center">
