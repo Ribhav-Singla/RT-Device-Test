@@ -141,7 +141,7 @@ export default function Logs() {
             </Table.HeadCell>
             <Table.HeadCell
               className="text-base bg-blackOlive text-flame text-center"
-              colSpan={3}
+              colSpan={2}
             >
               Device
             </Table.HeadCell>
