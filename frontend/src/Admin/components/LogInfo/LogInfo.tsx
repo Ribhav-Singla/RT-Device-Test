@@ -110,12 +110,6 @@ export default function ({
             log.device.model
           }
         </Table.Cell>
-        <Table.Cell className="whitespace-nowrap font-medium  text-base bg-eerieBlack text-floralWhite">
-          {
-            //@ts-ignore
-            log.device.company
-          }
-        </Table.Cell>
         <Table.Cell className="whitespace-nowrap font-medium  text-base pt-1 pb-1 bg-eerieBlack">
           <div className="w-[60px] h-[60px] flex justify-center items-center rounded">
             <img
@@ -141,7 +135,7 @@ export default function ({
             //@ts-ignore
             log.logoutTime
               ? //@ts-ignore
-                new Date(log.logoutTime).toLocaleString()
+                new Date(log.logoutTime).toLocaleTimeString()
               : "---"
           }
         </Table.Cell>
