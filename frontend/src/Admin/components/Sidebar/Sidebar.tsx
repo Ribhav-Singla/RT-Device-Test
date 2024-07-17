@@ -11,7 +11,7 @@ export default function Sidebar(){
               <span>
                   <img src={Logo} alt="Logo" className="max-w-[20px]" />
               </span>
-              Esferasoft Device Admin
+              Esferasoft Devices
             </h1>
           </Link>
           <div className="absolute top-12 left-0 w-full" >
