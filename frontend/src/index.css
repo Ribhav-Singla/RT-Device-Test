@@ -49,8 +49,12 @@ input {
 }
 
 
-
-
+/* 17.7.24 */
+.demo .px-6 {
+	padding-left: 1rem;
+	padding-right: 1.5rem;
+}
+/* 17.7.24 */
 .overlay {
   position: fixed;
   top: 0;

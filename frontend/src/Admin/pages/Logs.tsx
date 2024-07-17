@@ -128,7 +128,7 @@ export default function Logs() {
             </div>
           </div>
         </div>
-        <Table striped className="w-full">
+        <Table striped className="w-[100%] demo">
           <Table.Head>
             <Table.HeadCell className=" text-base bg-blackOlive text-flame">
               S.No
