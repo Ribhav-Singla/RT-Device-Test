@@ -190,13 +190,16 @@ userRouter.post('/returnDevice/:id', userAuth, async (req, res) => {
             //@ts-ignore
             user.devices = user.devices.filter((id) => id != deviceId)
             await user.save()
-            const log = new Logs({
-                employee: user._id,
-                device: device._id,
-                loginTime: bookedDate,
-                logoutTime: new Date()
+            const log = await Logs.findOneAndUpdate({
+                employee : user._id,
+                device : device._id,
+                logoutTime : null
+            },{
+                logoutTime : Date.now()
+            },{
+                new : true
             })
-            await log.save();
+            
             await getDevices();
             await myDevices(userId);
             await getAdminDevices()

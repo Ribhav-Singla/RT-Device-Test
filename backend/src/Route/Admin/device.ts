@@ -9,15 +9,15 @@ import { Logs } from "../../Models/Logs";
 
 export const deviceRouter = express.Router();
 
-deviceRouter.get('/models',async(req,res)=>{
+deviceRouter.get('/models', async (req, res) => {
   try {
-      const models = await Device.find({},{model:1})
-      return res.status(200).json({ models })
+    const models = await Device.find({}, { model: 1 })
+    return res.status(200).json({ models })
   } catch (error) {
-      console.log('error occured while getting models: ',error);
-      return res.status(500).json({
-          message: 'error occured while getting models'
-      })
+    console.log('error occured while getting models: ', error);
+    return res.status(500).json({
+      message: 'error occured while getting models'
+    })
   }
 })
 
@@ -141,54 +141,57 @@ deviceRouter.post('/returnDevice/:id', adminAuth, async (req, res) => {
   const deviceId = req.params.id
   try {
 
-      const device = await Device.findById(deviceId)
-      if (!device) {
-          return res.status(404).json({
-              message: "Device not found"
-          })
-      }
-      if (!device.isBooked) {
-          return res.status(400).json({
-              message: "Device is not booked"
-          })
-      }
-
-      const userId = device.bookedBy
-
-      device.isBooked = false
-      device.bookedBy = null
-      const bookedDate = device.bookedDate
-      await device.save()
-
-      const user = await Employee.findById(userId)
-      if (user) {
-          //@ts-ignore
-          user.devices = user.devices.filter((id) => id != deviceId)
-          await user.save()
-          const log = new Logs({
-              employee: user._id,
-              device: device._id,
-              loginTime: bookedDate,
-              logoutTime: new Date()
-          })
-          await log.save();
-          await getDevices();
-          //@ts-ignore
-          await myDevices(userId?.toString());
-          await getAdminDevices()
-          return res.status(200).json({
-              message: "Device returned successfully"
-          })
-      }
-      else {
-          return res.status(404).json({
-              message: "User not found"
-          })
-      }
-  } catch (error) {
-      console.log('error occured while returning a device: ', error);
-      return res.status(500).json({
-          message: 'error occured while returning a device'
+    const device = await Device.findById(deviceId)
+    if (!device) {
+      return res.status(404).json({
+        message: "Device not found"
       })
+    }
+    if (!device.isBooked) {
+      return res.status(400).json({
+        message: "Device is not booked"
+      })
+    }
+
+    const userId = device.bookedBy
+
+    device.isBooked = false
+    device.bookedBy = null
+    const bookedDate = device.bookedDate
+    await device.save()
+
+    const user = await Employee.findById(userId)
+    if (user) {
+      //@ts-ignore
+      user.devices = user.devices.filter((id) => id != deviceId)
+      await user.save()
+      const log = await Logs.findOneAndUpdate({
+        //@ts-ignore
+        employee: user._id,
+        device: device._id,
+        logoutTime: null
+      }, {
+        logoutTime: Date.now()
+      }, {
+        new: true
+      })
+      await getDevices();
+      //@ts-ignore
+      await myDevices(userId?.toString());
+      await getAdminDevices()
+      return res.status(200).json({
+        message: "Device returned successfully"
+      })
+    }
+    else {
+      return res.status(404).json({
+        message: "User not found"
+      })
+    }
+  } catch (error) {
+    console.log('error occured while returning a device: ', error);
+    return res.status(500).json({
+      message: 'error occured while returning a device'
+    })
   }
 })
