@@ -112,17 +112,16 @@ export default function DeviceInfo({
       <Table.Row>
         {isDelete ? (
           <div className="overlay">
-            <div className="whitespace-nowrap font-medium  text-base bg-blackOlive text-floralWhite text-center rounded-md py-5 px-5 delete-btn">
+            <div className="del-device online-model whitespace-nowrap font-medium  text-base bg-blackOlive text-floralWhite text-center rounded-md py-5 px-5 delete-btn">
               <p className="text-flame">
                 Are you sure you want to delete this device?
               </p>
               <div>
-                <p>{model}</p>
-                <p>{company}</p>
+                <p>{model} {company}</p>
               </div>
               <div className="flex justify-center items-center gap-5 cursor-pointer mt-4">
                 <span
-                  className="text-blue-500 bg-eerieBlack py-2 px-4 rounded"
+                  className="btn-no text-blue-500 bg-eerieBlack py-2 px-4 rounded"
                   onClick={handleDelete}
                 >
                   {deleteBtnLoader ? "Deleting..." : "Yes"}
@@ -131,7 +130,7 @@ export default function DeviceInfo({
                   ""
                 ) : (
                   <span
-                    className="text-red-600 bg-eerieBlack py-2 px-4 rounded"
+                    className="btn-no text-red-600 bg-eerieBlack py-2 px-4 rounded"
                     onClick={() => setIsDelete(!isDelete)}
                   >
                     No

@@ -84,7 +84,7 @@ input.rounded-full {
   border-radius: 20px;
   border-color: #fff;
   box-shadow: 0 0 2px;
-  width: 40%;
+  width: 100%;
   float: right;
 }
 .br{
@@ -135,6 +135,7 @@ span.device-model {
   height: 50px;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 .emp-name {
   font-weight: 500;
@@ -183,6 +184,72 @@ h2.header-title {
   font-size: 30px;
   padding: 20px 0px;
 }
+  .online-model {
+    padding: 50px;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    border-radius: 15px;
+  }
+  .del-device{
+    background: linear-gradient(30.8deg, rgb(26, 26, 29) 27.1%, rgb(111, 34, 50) 77.5%);
+  }
+  .btn-no {
+    background: white;
+    color: black;
+    font-weight: 600;
+    padding: 10px 30px;
+    border-radius: 10px;
+  }
+  .overlay{
+    z-index: 999;
+  }
+  .delete-btn .text-flame {
+    font-size: 30px;
+    padding: 20px;
+  }
+  .delete-btn p {
+    font-size: 20px;
+    padding: 10px;
+  }
+  .online-model.return {
+    background: linear-gradient(-160.3deg, rgb(23, 41, 77) 6.3%, rgb(243, 113, 154) 133.9%);
+    padding: 50px;
+  }
+
+  .logoff{
+    border: 1px solid black;
+    padding: 10px 20px;
+    background: black;
+    color: white;
+    border-radius: 50px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+  }
+  .set-ht{
+    height: 70px;
+  }
+  .sidebar-setting{
+    position: relative;
+  }
+  .side-mob{
+    height: 70px;
+  }
+  .sidebar-setting {
+    position: absolute;
+    top: 10%;
+  }
+  .login-btn {
+    border-radius: 40px;
+    width: auto;
+    padding: 10px 30px;
+  }
+  .admin-input{
+    border-radius: 20px;
+    margin-top: 15px;
+  }
+  
 /* 18-07-24 */
 .overlay {
   position: fixed;
@@ -261,4 +328,51 @@ input.rounded-full{
 .user-logo{
   padding: 20px;
 }
+h2.header-title {
+  padding-top: 0px;
+    padding-bottom: 20px !important;
+  }
+.side-mob{
+  display: none;
+}
+.side-bar {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 999;
+}
+.mar-mob{
+  margin: 0;
+}
+.drop{
+  left: 95%;
+}
+.side-menu{
+  display: none;
+}
+  .side-bar{
+    position: absolute;
+    top: 10%;
+    left: 0;
+  }
+  .side-menu{
+    display: block;
+  }
+  .menu-btn-container{
+    justify-content: space-between;
+  }
+  .admin-acc{
+    width: auto;
+  }
+  .admin-company-name{
+    font-size: 1.8rem;
+  }
+  .admin-company-image{
+    max-width: 40px;
+  }
+  .admin-company-tagline{
+    font-size: 1.1rem;
+    margin-top: 5px;
+  }
 }

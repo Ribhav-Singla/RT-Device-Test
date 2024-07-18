@@ -107,20 +107,20 @@ export default function CurrentDevices() {
                 History
               </h1>
               <div className="flex justify-center items-center gap-4 pr-2 ">
-                  <div className="flex justify-center items-center border-l-2 border-r-2 border-black rounded-lg py-1 px-3 gap-4 cursor-pointer" onClick={()=>{
+                  <div className="flex justify-center items-center border-2  border-black rounded-lg py-1 px-3 gap-4 cursor-pointer" onClick={()=>{
                     setShowDevice(!showDevice)
                     if(showDate) setShowDate(false)
                   }}>
-                      <h1 className="text-eerieBlack rounded-lg">Device</h1>
+                      <h1 className="text-eerieBlack rounded-lg p-[8px]">Device</h1>
                       {
                         !showDevice ? <IoMdArrowDropdown size={25} className="text-eerieBlack"/> : <IoMdArrowDropup size={25} className="text-eerieBlack"/>
                       }
                   </div>
-                  <div className="flex justify-center items-center border-l-2 border-r-2 border-black rounded-lg gap-4 py-1 px-3 cursor-pointer" onClick={()=>{
+                  <div className="flex justify-center items-center border-2 border-black rounded-lg gap-4 py-1 px-3 cursor-pointer" onClick={()=>{
                     setShowDate(!showDate)
                     if(showDevice) setShowDevice(false)
                   }}>
-                      <h1 className="text-eerieBlack rounded-lg">Date</h1>
+                      <h1 className="text-eerieBlack p-2 rounded-lg">Date</h1>
                       {
                         !showDate ? <IoMdArrowDropdown size={25} className="text-eerieBlack"/> : <IoMdArrowDropup size={25} className="text-eerieBlack"/>
                       }

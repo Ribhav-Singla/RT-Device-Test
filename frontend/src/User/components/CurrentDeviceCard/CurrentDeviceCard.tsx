@@ -87,17 +87,16 @@ export default function CurrentDeviceCard({ device }: { device: Device }) {
       </motion.div>
       {isReturn ? (
         <div className="overlay z-10">
-          <div className="whitespace-nowrap font-medium  text-base bg-blackOlive text-floralWhite text-center rounded-md py-5 px-5 delete-btn">
-            <p className="text-flame">
+          <div className="online-model return whitespace-nowrap font-medium  text-base bg-blackOlive text-floralWhite text-center rounded-md py-5 px-5 delete-btn">
+            <p className="text-black font-semibold">
               Are you sure you want to return this device?
             </p>
             <div>
-              <p>{device.model}</p>
-              <p>{device.company}</p>
+              <p>{device.model} {device.company}</p>
             </div>
             <div className="flex justify-center items-center gap-5 cursor-pointer mt-4">
               <span
-                className="text-blue-500 bg-eerieBlack py-2 px-4 rounded"
+                className="btn-no text-blue-500 bg-eerieBlack py-2 px-4 rounded"
                 onClick={handleReturn}
               >
                 {btnLoader ? "Returning..." : "Yes"}
@@ -106,7 +105,7 @@ export default function CurrentDeviceCard({ device }: { device: Device }) {
                 ""
               ) : (
                 <span
-                  className="text-red-600 bg-eerieBlack py-2 px-4 rounded"
+                  className="btn-no text-red-600 bg-eerieBlack py-2 px-4 rounded"
                   onClick={() => setIsReturn(!isReturn)}
                 >
                   No

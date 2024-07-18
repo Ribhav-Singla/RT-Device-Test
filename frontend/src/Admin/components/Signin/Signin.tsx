@@ -46,14 +46,14 @@ export default function AdminSignin() {
         <div className="flex-col justify-center items-center">
           <div className="flex-col justify-center items-center gap-5 mb-10">
             <div className="flex justify-center items-center gap-5">
-              <img src={Logo} alt="Logo" className="max-w-[80px]" />
-              <h1 className="text-floralWhite text-5xl font-extrabold">Esfersoft Solutions</h1>
+              <img src={Logo} alt="Logo" className="max-w-[80px] admin-company-image" />
+              <h1 className="text-floralWhite text-5xl font-extrabold admin-company-name">Esfersoft Solutions</h1>
             </div>
             <div className="flex justify-center items-center typewriter w-fit mx-auto">
-              <p className="text-2xl text-floralWhite font-semibold">Inspiring Digital Excellence</p>
+              <p className="text-2xl text-floralWhite font-semibold admin-company-tagline">Inspiring Digital Excellence</p>
             </div>
           </div>
-          <div className="border-2 mx-7 rounded min-w-[350px] md:w-[450px] flex flex-col justify-center items-center pb-5 container bg-blackOlive">
+          <div className="admin-acc border-2 mx-7 rounded min-w-[350px] md:w-[450px] flex flex-col justify-center items-center pb-5 container bg-blackOlive">
             <h1 className="font-bold text-3xl text-slate-700 mb-2 pt-5 text-floralWhite">
               Admin account
             </h1>
@@ -72,7 +72,7 @@ export default function AdminSignin() {
                         value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
                         message: 'Invalid email address',
                       }, })}
-                      className="bg-eerieBlack text-floralWhite"
+                      className="bg-eerieBlack text-floralWhite admin-input"
                     />
                     <p className="text-red-500">{errors.email?.message}</p>
                   </div>
@@ -86,11 +86,11 @@ export default function AdminSignin() {
                           required: "Password is required",
                         })}
                         placeholder="xxx"
-                        className=" rounded-sm border-none bg-eerieBlack text-floralWhite"
+                        className=" rounded-sm border-none bg-eerieBlack text-floralWhite admin-input"
                       />
                       {showPassword ? (
                         <svg
-                          className="w-6 h-6 text-floralWhite absolute top-3 left-[80%] cursor-pointer"
+                          className="w-6 h-6 text-floralWhite absolute top-6 left-[80%] cursor-pointer"
                           aria-hidden="true"
                           xmlns="http://www.w3.org/2000/svg"
                           width="24"
@@ -109,7 +109,7 @@ export default function AdminSignin() {
                         </svg>
                       ) : (
                         <svg
-                          className="w-6 h-6 text-floralWhite absolute top-3 left-[80%] cursor-pointer"
+                          className="w-6 h-6 text-floralWhite absolute top-6 left-[80%] cursor-pointer"
                           xmlns="http://www.w3.org/2000/svg"
                           width="24"
                           height="24"
@@ -137,9 +137,9 @@ export default function AdminSignin() {
                 <div className="mt-4 flex flex-col justify-center items-center w-full">
                   <button
                     type="submit"
-                    className="bg-timerWolf rounded text-black text-lg font-semibold px-5 py-2 w-[40%]"
+                    className="login-btn bg-timerWolf rounded text-black text-lg font-semibold px-5 py-2 w-[40%]"
                   >
-                    {btnLoader ? 'Please wait...' : 'Signin'}
+                    {btnLoader ? 'Please wait...' : 'Sign in'}
                   </button>
                 </div>
               </form>

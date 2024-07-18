@@ -38,7 +38,7 @@ export default function Layout() {
             label={
               //@ts-ignore
               user && user.name ? (
-                <div className=" bg-blue-500 px-4 py-2 text-white font-bold text-xl rounded-full user-photo">
+                <div className=" px-4 py-2 text-white font-bold text-xl rounded-full user-photo" style={{backgroundColor:'rgb(254, 50, 30)'}}>
                   <p>{
                     //@ts-ignore
                   user.name[0].toUpperCase()}</p>

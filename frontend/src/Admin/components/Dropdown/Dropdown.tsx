@@ -19,7 +19,7 @@ export default function Dropdown({
     <>
       <div>
         <div
-          className="mt-2 pb-2 relative cursor-pointer select-none border-b-2 w-full"
+          className="mar-mob mt-2 pb-2 relative cursor-pointer select-none border-b-2 w-full z-10 bg-eerieBlack"
           onClick={() => setOption(!option)}
         >
           <p className="text-lg p-2 font-semibold pl-5 text-flame">{dropDown}</p>
@@ -41,7 +41,7 @@ export default function Dropdown({
             </svg>
           ) : (
             <svg
-              className="w-6 h-6 absolute top-3 left-[80%] text-floralWhite"
+              className="drop w-6 h-6 absolute top-3 left-[80%] text-floralWhite"
               width="24"
               height="24"
               fill="none"
