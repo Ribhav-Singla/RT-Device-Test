@@ -28,8 +28,9 @@ export default function Users() {
 
   return (
     <>
-      <div className="min-h-screen bg-white p-4 flex-col justify-center items-center">
-        <div className=" flex justify-center items-center w-full mb-5">
+      <div className="min-h-screen bg-white p-4 flex-col justify-center items-center main-sc">
+        <div className=" flex justify-center items-center w-full mb-5 user-logo">
+        <img src="/logo-es.png" alt="logo" className="esfera-logo"></img>
           <div className="relative w-[50%]">
             <input
               type="text"

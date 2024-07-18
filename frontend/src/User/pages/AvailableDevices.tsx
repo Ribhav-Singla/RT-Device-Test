@@ -33,11 +33,11 @@ export default function AvailableDevices() {
 
   return (
     <>
-      <div className="min-h-screen bg-white flex-col justify-center items-center">
+      <div className="min-h-screen bg-white flex-col justify-center items-center main-sc">
         <div className=" flex justify-center items-center w-full">
           
         </div>
-        <div className="p-4 mt-4 flex justify-center items-start flex-wrap gap-5">
+        <div className="p-4 mt-4 flex justify-center items-start flex-wrap gap-5 gap-spc">
           {devices.map((device) => {
             //@ts-ignore
             return <DeviceCard device={device} key={device.id+v4()} />;
