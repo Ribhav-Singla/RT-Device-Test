@@ -1,5 +1,4 @@
 import axios from "axios";
-import Device from "/Device.png";
 import { motion } from "framer-motion";
 import { TiArrowBack } from "react-icons/ti";
 import toast from "react-hot-toast";
@@ -66,12 +65,12 @@ export default function OnlineDevice({id,name,model,company,empImage,deviceImage
         className="flex justify-center border-2 bg-blackOlive rounded-lg w-fit container cursor-pointer"
       >
         <div className="p-1" onClick={()=>setIsReturn(!isReturn)}>
-          <TiArrowBack className="text-blue-500 cursor-pointer" size={35}/>
+          <TiArrowBack className="text-flame cursor-pointer" size={35}/>
         </div>
         <div className="flex-col justify-center items-center p-4 w-fit">
           <div className="w-[120px] h-[120px] flex justify-center items-center rounded-full image-box">
             <img
-              src={ empImage ? `${import.meta.env.VITE_BACKEND_URL}/${empImage}` : "https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?size=338&ext=jpg&ga=GA1.1.2113030492.1720051200&semt=ais_user" }
+              src={ empImage ? `${import.meta.env.VITE_BACKEND_URL}/${empImage}` : "/user.png" }
               alt="Employee Image"
               className="text-center object-contain rounded-full max-h-[120px]"
             />
@@ -88,7 +87,7 @@ export default function OnlineDevice({id,name,model,company,empImage,deviceImage
         <div className="flex-col justify-center items-center p-4 w-fit">
           <div className="w-[120px] h-[120px] flex justify-center items-center rounded-full image-box">
             <img
-              src={deviceImage ? `${import.meta.env.VITE_BACKEND_URL}/${deviceImage}` :Device}
+              src={deviceImage ? `${import.meta.env.VITE_BACKEND_URL}/${deviceImage}` :"/device.png"}
               alt="Device Image"
               className="text-center object-contain rounded-full max-h-[120px]"
             />
@@ -114,7 +113,7 @@ export default function OnlineDevice({id,name,model,company,empImage,deviceImage
             </div>
             <div className="flex justify-center items-center gap-5 cursor-pointer mt-4">
               <span
-                className="text-blue-500 bg-eerieBlack py-2 px-4 rounded"
+                className="text-blue-500 bg-eerieBlack py-2 px-4 rounded btn-no"
                 onClick={handleReturn}
               >
                 {btnLoader ? "Returning..." : "Yes"}
@@ -123,7 +122,7 @@ export default function OnlineDevice({id,name,model,company,empImage,deviceImage
                 ""
               ) : (
                 <span
-                  className="text-red-600 bg-eerieBlack py-2 px-4 rounded"
+                  className="text-red-600 bg-eerieBlack py-2 px-4 rounded btn-no"
                   onClick={() => setIsReturn(!isReturn)}
                 >
                   No

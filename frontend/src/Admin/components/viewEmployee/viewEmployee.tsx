@@ -52,7 +52,7 @@ export default function ViewEmployee() {
                 />
               ) : (
                 <img
-                  src="https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?size=338&ext=jpg&ga=GA1.1.2113030492.1720051200&semt=ais_user"
+                  src="/user.png"
                   alt="Employee Image"
                   className="object-contain rounded-xl max-h-[200px]"
                 />

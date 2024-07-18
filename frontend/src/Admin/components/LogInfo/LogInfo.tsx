@@ -1,6 +1,5 @@
 import { Table } from "flowbite-react";
 import { BsSend } from "react-icons/bs";
-import Device from "/Device.png";
 import { Dispatch, SetStateAction, useState } from "react";
 import { LiaHourglassEndSolid } from "react-icons/lia";
 import axios from "axios";
@@ -97,7 +96,7 @@ export default function ({
                 log.employee.image
                   ? //@ts-ignore
                     `${import.meta.env.VITE_BACKEND_URL}/${log.employee.image}`
-                  : "https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?size=338&ext=jpg&ga=GA1.1.2113030492.1720051200&semt=ais_user"
+                  : "/user.png"
               }
               alt="Employee Image"
               className="rounded object-contain max-h-[45px]"
@@ -117,7 +116,7 @@ export default function ({
                 //@ts-ignore
                 log.device.image
                   ? `${import.meta.env.VITE_BACKEND_URL}/${log.device.image}`
-                  : Device
+                  : "/device.png"
               }
               alt="Device Image"
               className="rounded object-contain max-h-[50px]"

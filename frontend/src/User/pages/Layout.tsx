@@ -4,7 +4,6 @@ import { useRecoilValueLoadable } from "recoil";
 import { userAtom } from "../../recoil";
 import { Dropdown } from "flowbite-react";
 import { useEffect, useState } from "react";
-import Logo from '/vite.png'
 
 export default function Layout() {
   const userLoadable = useRecoilValueLoadable(userAtom);

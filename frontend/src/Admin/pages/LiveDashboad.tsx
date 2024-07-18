@@ -56,7 +56,7 @@ export default function LiveDashboad() {
           <h1 className="text-xl text-floralWhite pl-3 pt-3 pb-3">
             Online Users
           </h1>
-          <button className="text-white bg-blue-600 p-2 rounded-lg" onClick={()=>setIsReturnAll(!isReturnAll)}>Return all</button>
+          <button className="text-white bg-blue-600 p-2 rounded-lg logoff" onClick={()=>setIsReturnAll(!isReturnAll)}>Return all</button>
         </div>
         <div className="flex justify-start items-start flex-wrap p-3 gap-x-3 gap-y-5">
           {adminDevices.length >0 ? adminDevices.map((device, index) => {
@@ -98,7 +98,7 @@ export default function LiveDashboad() {
               </p>
               <div className="flex justify-center items-center gap-5 cursor-pointer mt-4">
                 <span
-                  className="text-blue-500 bg-eerieBlack py-2 px-4 rounded"
+                  className="text-blue-500 bg-eerieBlack py-2 px-4 rounded btn-no"
                   onClick={handleReturnAll}
                 >
                   {returnBtnLoader ? 'Returning...' : 'Yes'}
@@ -107,7 +107,7 @@ export default function LiveDashboad() {
                   ""
                 ) : (
                   <span
-                    className="text-red-600 bg-eerieBlack py-2 px-4 rounded"
+                    className="text-red-600 bg-eerieBlack py-2 px-4 rounded btn-no"
                     onClick={() => setIsReturnAll(!isReturnAll)}
                   >
                     No

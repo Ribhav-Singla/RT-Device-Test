@@ -91,14 +91,14 @@ export default function EmployeeInfo({
               src={
                 image
                   ? `${import.meta.env.VITE_BACKEND_URL}/${image}`
-                  : "https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?size=338&ext=jpg&ga=GA1.1.2113030492.1720051200&semt=ais_user"
+                  : "/user.png"
               }
               alt="Employee Image"
               className="rounded object-contain max-h-[40px]"
             />
           </div>
         </Table.Cell>
-        <Table.Cell className="whitespace-nowrap font-medium text-blue-500 text-center text-base bg-eerieBlack">
+        <Table.Cell className="whitespace-nowrap font-medium text-flame text-center text-base bg-eerieBlack">
           <div className="flex justify-center items-center gap-10">
             <div
               className="relative cursor-pointer flex flex-col justify-center items-center hover-container"
@@ -110,7 +110,7 @@ export default function EmployeeInfo({
               </span>
             </div>
             <div
-              className="relative cursor-pointer text-yellow-500 flex flex-col justify-center items-center hover-container"
+              className="relative cursor-pointer text-flame flex flex-col justify-center items-center hover-container"
               onClick={() => navigate(`/admin/changeEmployeePassword/${id}`)}
             >
               <FaUnlockAlt size={20} className="ml-2" />
@@ -119,7 +119,7 @@ export default function EmployeeInfo({
               </span>
             </div>
             <div
-              className="relative cursor-pointer text-green-500 flex flex-col justify-center items-center hover-container"
+              className="relative cursor-pointer text-flame flex flex-col justify-center items-center hover-container"
               onClick={() => navigate(`/admin/updateEmployee/${id}`)}
             >
               <FiEdit size={20} className="ml-2" />
@@ -128,7 +128,7 @@ export default function EmployeeInfo({
               </span>
             </div>
             <div
-              className="relative cursor-pointer text-red-500 flex flex-col justify-center items-center hover-container"
+              className="relative cursor-pointer text-flame flex flex-col justify-center items-center hover-container"
               onClick={()=>setIsDelete(!isDelete)}
             >
               <RiDeleteBin4Line size={20} className="ml-2" />
@@ -139,7 +139,7 @@ export default function EmployeeInfo({
           </div>
         </Table.Cell>
         <Table.Cell className="whitespace-nowrap font-medium text-base bg-eerieBlack text-floralWhite">
-          <button className="bg-blue-500 p-1 rounded-lg px-2 font-semibold" onClick={handleUserLogin}>{userLoginBtnLoader ? 'wait...' : 'Login'}</button>
+          <button className="logoff table-login bg-blue-500 p-1 rounded-lg px-2 font-semibold" onClick={handleUserLogin}>{userLoginBtnLoader ? 'wait...' : 'Login'}</button>
         </Table.Cell>
       </Table.Row>
 
@@ -160,7 +160,7 @@ export default function EmployeeInfo({
               </div>
               <div className="flex justify-center items-center gap-5 cursor-pointer mt-4">
                 <span
-                  className="text-blue-500 bg-eerieBlack py-2 px-4 rounded"
+                  className="text-blue-500 bg-eerieBlack py-2 px-4 rounded btn-no"
                   onClick={handleDelete}
                 >
                   {deleteBtnLoader ? "Deleting..." : "Yes"}
@@ -169,7 +169,7 @@ export default function EmployeeInfo({
                   ""
                 ) : (
                   <span
-                    className="text-red-600 bg-eerieBlack py-2 px-4 rounded"
+                    className="text-red-600 bg-eerieBlack py-2 px-4 rounded btn-no"
                     onClick={() => setIsDelete(!isDelete)}
                   >
                     No

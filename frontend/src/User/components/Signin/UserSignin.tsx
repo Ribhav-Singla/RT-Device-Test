@@ -14,7 +14,7 @@ type Inputs = {
 export default function UserSignin({ id ,setShowSignin }: { id :string,setShowSignin: (showSignin:boolean)=>void }) {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  const [btnLoader,setBtnLoader] = useState(false)
+  const [btnLoader,setBtnLoader] = useState(false )
   const {
     register,
     handleSubmit,
@@ -69,7 +69,7 @@ export default function UserSignin({ id ,setShowSignin }: { id :string,setShowSi
             className="absolute top-2 left-[3%]  cursor-pointer"
             onClick={() => setShowSignin(false)}
           />
-          <h1 className="font-bold text-3xl text-slate-700 mb-2 pt-5 text-box">
+          <h1 className="pass font-bold text-3xl text-slate-700 mb-2 pt-5 text-box">
             Password
           </h1>
           <div className="flex min-w-full">
@@ -136,7 +136,7 @@ export default function UserSignin({ id ,setShowSignin }: { id :string,setShowSi
               <div className="mt-4 flex flex-col justify-center items-center w-full">
                 <button
                   type="submit"
-                  className="btn-enter bg-red-500 rounded-lg  text-white text-lg font-bold px-5 py-2 w-[40%]"
+                  className="btn-enter wait bg-red-500 rounded-lg  text-white text-lg font-bold px-5 py-2"
                 >
                   {btnLoader ? 'please wait...' : 'Enter'}
                 </button>

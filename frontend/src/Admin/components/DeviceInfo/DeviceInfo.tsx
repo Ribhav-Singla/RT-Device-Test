@@ -65,14 +65,14 @@ export default function DeviceInfo({
               src={
                 image
                   ? `${import.meta.env.VITE_BACKEND_URL}/${image}`
-                  : Device
+                  : "/device.png"
               }
               alt="Device Image"
               className="rounded object-contain max-h-[45px]"
             />
           </div>
         </Table.Cell>
-        <Table.Cell className="whitespace-nowrap font-medium text-blue-500 text-center text-base bg-eerieBlack">
+        <Table.Cell className="whitespace-nowrap font-medium text-flame text-center text-base bg-eerieBlack">
           <div className="flex justify-center items-center gap-10">
             <div
               className="relative cursor-pointer flex flex-col justify-center items-center hover-container"
@@ -84,7 +84,7 @@ export default function DeviceInfo({
               </span>
             </div>
             <div
-              className="relative cursor-pointer flex flex-col text-green-500 justify-center items-center hover-container"
+              className="relative cursor-pointer flex flex-col text-flame justify-center items-center hover-container"
               onClick={() => navigate(`/admin/updateDevice/${id}`)}
             >
               <FiEdit size={20} className="ml-2" />
@@ -93,7 +93,7 @@ export default function DeviceInfo({
               </span>
             </div>
             <div
-              className="relative cursor-pointer flex flex-col text-red-500 justify-center items-center hover-container"
+              className="relative cursor-pointer flex flex-col text-flame justify-center items-center hover-container"
               onClick={() => setIsDelete(!isDelete)}
             >
               <RiDeleteBin4Line size={20} className="ml-2" />
@@ -112,7 +112,7 @@ export default function DeviceInfo({
       <Table.Row>
         {isDelete ? (
           <div className="overlay">
-            <div className="del-device online-model whitespace-nowrap font-medium  text-base bg-blackOlive text-floralWhite text-center rounded-md py-5 px-5 delete-btn">
+            <div className="online-model whitespace-nowrap font-medium  text-base bg-blackOlive text-floralWhite text-center rounded-md py-5 px-5 delete-btn">
               <p className="text-flame">
                 Are you sure you want to delete this device?
               </p>

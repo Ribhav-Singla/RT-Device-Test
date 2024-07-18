@@ -67,9 +67,9 @@ export default function CurrentDeviceCard({ device }: { device: Device }) {
         <motion.div className="">
           <img
             src={
-              device.image ? `${import.meta.env.VITE_BACKEND_URL}/${device.image}` : Device
+              device.image ? `${import.meta.env.VITE_BACKEND_URL}/${device.image}` : "/device.png"
             }
-            alt="User Image"
+            alt="Device Image"
             className="text-center object-contain max-h-[180px] usr"
           />
         </motion.div>
@@ -92,7 +92,7 @@ export default function CurrentDeviceCard({ device }: { device: Device }) {
               Are you sure you want to return this device?
             </p>
             <div>
-              <p>{device.model} {device.company}</p>
+              <p style={{color:"#fa311e"}}>{device.model} {device.company}</p>
             </div>
             <div className="flex justify-center items-center gap-5 cursor-pointer mt-4">
               <span

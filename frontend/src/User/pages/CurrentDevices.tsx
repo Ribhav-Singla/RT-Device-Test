@@ -5,7 +5,6 @@ import { socket, socketState } from "../../socket";
 import { useRecoilValue } from "recoil";
 import { useNavigate } from "react-router-dom";
 import Device from "/Device.png";
-import { v4 } from "uuid";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { IoMdArrowDropup } from "react-icons/io";
 import {motion} from 'framer-motion'
@@ -190,7 +189,7 @@ export default function CurrentDevices() {
                             <div className="max-w-[60px] max-h-[60px] flex justify-center items-center rounded">
                               <img
                                 //@ts-ignore
-                                src={log.device.image ? `${import.meta.env.VITE_BACKEND_URL}/${log.device.image}` : Device}
+                                src={log.device.image ? `${import.meta.env.VITE_BACKEND_URL}/${log.device.image}` : "/device.png"}
                                 alt="Device Image"
                                 className="object-contain max-h-[80px] rounded"
                               />

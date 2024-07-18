@@ -68,9 +68,9 @@ export default function DeviceCard({ device }: { device: Device }) {
         <motion.div className="w-[100%] h-[180px] flex justify-center items-center">
           <img
             src={
-              device.image ? `${import.meta.env.VITE_BACKEND_URL}/${device.image}` : Device
+              device.image ? `${import.meta.env.VITE_BACKEND_URL}/${device.image}` : "/device.png"
             }
-            alt="User Image"
+            alt="Device Image"
             className="text-center object-contain max-h-[180px] usr"
           />
         </motion.div>

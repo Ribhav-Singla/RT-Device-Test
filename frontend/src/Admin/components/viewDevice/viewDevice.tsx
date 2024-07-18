@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Spinner from "../../../Common/Spinner";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import Device from "/Device.png";
 
 export default function ViewDevice() {
   const { id } = useParams();
@@ -46,7 +45,7 @@ export default function ViewDevice() {
       <div className="bg-eerieBlack h-[250px] w-[250px] rounded-xl flex justify-center items-center">
         {
             //@ts-ignore
-            device.image ? <img src={`${import.meta.env.VITE_BACKEND_URL}/${device.image}`} alt="Device Image" className="object-contain rounded-xl max-h-[250px]" /> : <img src={Device} alt="Device Image" className="object-contain rounded-xl max-h-[200px]" />
+            device.image ? <img src={`${import.meta.env.VITE_BACKEND_URL}/${device.image}`} alt="Device Image" className="object-contain rounded-xl max-h-[250px]" /> : <img src="/device.png" alt="Device Image" className="object-contain rounded-xl max-h-[200px]" />
         }
       </div>
       <div className="flex justify-center items-center gap-28">

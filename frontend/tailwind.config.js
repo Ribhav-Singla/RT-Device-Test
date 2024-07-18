@@ -8,7 +8,7 @@ export default {
   theme: {
     extend: {},
     colors:{
-      'floralWhite' : '#FFFCF2',
+      'floralWhite' : '#ffece2',
       'timerWolf' : '#CCC5B9',
       'blackOlive' : '#403D39',
       'eerieBlack' : '#252422',
