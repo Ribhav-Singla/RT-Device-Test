@@ -60,22 +60,17 @@ input {
   border-top-left-radius: 50px;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 50px;
+  background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+
 }
 .text-3xl {
   line-height: 2.25rem;
   padding: 10px;
   font-size: 18px;
 }
-.w-fit.card-bg {
-  background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
-}
-.min-h-screen.bg-white.p-4.flex-col.justify-center.items-center {
+.main-sc {
   background: linear-gradient(to top, #09203f 0%, #537895 100%);
-}
-button.btn-enter.bg-red-500.rounded-lg {
-  background: linear-gradient(to top,#537895  0%, #09203f 100%);
-  border-radius: 50px;
-  width: 100px;
+  padding: 0px;
 }
 img.usr {
   border-top-left-radius: 50px!important;
@@ -89,6 +84,8 @@ input.rounded-full {
   border-radius: 20px;
   border-color: #fff;
   box-shadow: 0 0 2px;
+  width: 40%;
+  float: right;
 }
 .br{
     border-radius: 20px;
@@ -109,11 +106,54 @@ button.btn-enter {
   padding: 5px;
   font-size: 20px;
   font-weight: 400;
+  background: linear-gradient(to top,#537895  0%, #09203f 100%);
+  border-radius: 50px;
+  width: 100px;
 }
 .test tr {
   border: none;
 }
 /* 17.7.24 */
+/* 18-07-24 */
+.dev.h-fit-crds {
+  height: 300px;
+}
+span.device-model {
+  font-size: 18px;
+  display: block;
+  width: 100%;
+}
+.header{
+  background: black;
+  padding: 0px 20px;
+}
+.user-photo {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+.emp-name {
+  font-weight: 500;
+  padding: 10px;
+}
+button.btn-enter.device-btn {
+  width: max-content;
+  padding: 10px 20px;
+  font-size: 16px;
+}
+.esfera-logo{
+  width: 200px;
+  height: 100px;
+  object-fit: contain;
+}
+.user-logo {
+  justify-content: space-between;
+  background: black;
+  padding: 0px 20px;
+}
+
+/* 18-07-24 */
 .overlay {
   position: fixed;
   top: 0;

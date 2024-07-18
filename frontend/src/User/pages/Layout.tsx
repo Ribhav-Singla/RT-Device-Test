@@ -19,11 +19,11 @@ export default function Layout() {
 
   return (
     <>
-      <div className="flex justify-between items-center w-full bg-floralWhite p-2 border-b-2">
+      <div className="flex justify-between items-center w-full bg-floralWhite p-2 border-b-2 header">
         <div className="flex justify-center items-center gap-5">
-          <img src={Logo} alt="Logo" className="max-w-[35px] max-h-[35px]"/>
+          <img src="/logo-es.png" alt="Logo" className="esfera-logo"/>
           <button
-            className="bg-green-500 text-white text-md font-semibold p-2 rounded"
+            className="btn-enter bg-green-500 text-white text-md font-semibold p-2 rounded"
             onClick={() => {
               navigate("/user/currentDevices");
             }}
@@ -38,7 +38,7 @@ export default function Layout() {
             label={
               //@ts-ignore
               user && user.name ? (
-                <div className=" bg-blue-500 px-4 py-2 text-white font-bold text-xl rounded-full">
+                <div className=" bg-blue-500 px-4 py-2 text-white font-bold text-xl rounded-full user-photo">
                   <p>{
                     //@ts-ignore
                   user.name[0].toUpperCase()}</p>

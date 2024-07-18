@@ -66,14 +66,14 @@ export default function CurrentDevices() {
     <div className="bg-white">
       <div>
         <div className="flex justify-between items-center p-2">
-          <h2 className="font-extrabold text-2xl">
+          <h2 className="font-extrabold text-2xl emp-name">
             {
               //@ts-ignore
               devices && devices[0] && devices[0].name
             }
           </h2>
           <button
-            className="bg-green-400 p-2 rounded font-semibold text-white"
+            className="btn-enter device-btn bg-green-400 p-2 rounded font-semibold text-white"
             onClick={() => navigate("/user/availableDevices")}
           >
             Add Device
@@ -83,7 +83,7 @@ export default function CurrentDevices() {
       </div>
       <div className="grid grid-cols-12 gap-x-5 p-5 dev-det">
         <div className="col-span-5 shadow-2xl rounded-lg">
-          <h1 className="text-lg font-extrabold p-3 pl-3 h-fit rounded-ss-lg rounded-se-lg  bg-gray-100">
+          <h1 className="text-lg font-extrabold p-3 pl-3 h-fit rounded-ss-lg rounded-se-lg  bg-gray-100 emp-name">
             Current Devices
           </h1>
           <div className="min-h-screen flex justify-center items-start gap-5 px-2 py-4 flex-wrap">
@@ -103,7 +103,7 @@ export default function CurrentDevices() {
         <div className="col-span-7 bg-gray-100 shadow-2xl rounded-lg">
       
             <div className="flex justify-between p-2">
-              <h1 className="text-lg font-extrabold text-eerieBlack p-1 pl-2 h-fit w-full ">
+              <h1 className="text-lg font-extrabold text-eerieBlack p-1 pl-2 h-fit w-full emp-name ">
                 History
               </h1>
               <div className="flex justify-center items-center gap-4 pr-2 ">

@@ -66,7 +66,7 @@ export default function UserSignin({ id ,setShowSignin }: { id :string,setShowSi
           className="br border-2 mx-7 rounded w-[400px] py-8 flex flex-col justify-center items-center container bg-white relative"
         >
           <IoArrowBack
-            className="absolute top-2 left-[3%] font-extrabold text-2xl cursor-pointer"
+            className="absolute top-2 left-[3%]  cursor-pointer"
             onClick={() => setShowSignin(false)}
           />
           <h1 className="font-bold text-3xl text-slate-700 mb-2 pt-5 text-box">

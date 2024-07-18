@@ -63,7 +63,7 @@ export default function DeviceCard({ device }: { device: Device }) {
             ease: "linear",
           },
         }}
-        className="w-fit bg-white rounded-lg cursor-pointer h-fit flex-col justify-center items-center"
+        className="w-fit bg-white rounded-lg cursor-pointer h-fit flex-col justify-center items-center dev h-fit-crds"
       >
         <motion.div className="w-[190px] h-[180px] flex justify-center items-center">
           <img
@@ -79,7 +79,7 @@ export default function DeviceCard({ device }: { device: Device }) {
         </motion.h1>
         <div className="w-full flex justify-center items-center p-2">
           <button
-            className="text-lg rounded text-white font-bold w-[50%] p-1 bg-red-500"
+            className="btn-enter text-lg rounded text-white font-bold w-[50%] p-1 bg-red-500"
             onClick={handleBook}
           >
             {btnLoader ? "Booking..." : "Book"}
