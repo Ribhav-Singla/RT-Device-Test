@@ -62,7 +62,7 @@ export default function CurrentDeviceCard({ device }: { device: Device }) {
             ease: "linear",
           },
         }}
-        className="w-fit bg-white rounded-lg cursor-pointer h-fit flex-col justify-center items-center h-fit-crds"
+        className="w-fit bg-white rounded-lg cursor-pointer h-fit flex-col justify-center items-center dev h-fit-crds"
       >
         <motion.div className="w-[190px] h-[180px] flex justify-center items-center">
           <img
@@ -74,10 +74,7 @@ export default function CurrentDeviceCard({ device }: { device: Device }) {
           />
         </motion.div>
         <motion.h1 className="text-2xl font-bold text-center pb-2 text-black text-box">
-          {device.model}
-        </motion.h1>
-        <motion.h1 className="text-2xl font-bold text-center pb-2 text-black text-box">
-          {device.company}
+          <span className="device-model">{device.model} {device.company}</span>
         </motion.h1>
         <div className="w-full flex justify-center items-center p-2">
           <button

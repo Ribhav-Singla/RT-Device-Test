@@ -122,6 +122,7 @@ span.device-model {
   font-size: 18px;
   display: block;
   width: 100%;
+  padding: 0px 10px;
 }
 .header{
   background: black;
