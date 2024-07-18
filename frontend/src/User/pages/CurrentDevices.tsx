@@ -77,7 +77,7 @@ export default function CurrentDevices() {
         </div>
         <hr />
       </div>
-      <div className="grid grid-cols-12 gap-x-5 p-5">
+      <div className="grid grid-cols-12 gap-x-5 p-5 dev-det">
         <div className="col-span-5 shadow-2xl rounded-lg">
           <h1 className="text-lg font-extrabold p-3 pl-3 h-fit rounded-ss-lg rounded-se-lg  bg-gray-100">
             Current Devices

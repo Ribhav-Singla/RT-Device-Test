@@ -40,11 +40,11 @@ export default function Users() {
             />
             <FaSearch
               color="gray"
-              className="text-black-400 absolute top-4 left-[90%]"
+              className="text-black-400 absolute top-4 left-[95%] mag"
             />
           </div>
         </div>
-        <div className="p-6 flex justify-center items-start flex-wrap gap-x-7 gap-y-7">
+        <div className="p-6 flex justify-center items-start flex-wrap gap-spc">
           {users.map((user) => (
             //@ts-ignore
             <UserCard key={user.id+v4()} id={user._id} image={user.image} name={user.name} />

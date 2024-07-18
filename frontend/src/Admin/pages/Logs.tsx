@@ -128,6 +128,7 @@ export default function Logs() {
             </div>
           </div>
         </div>
+        <div className="test">
         <Table striped className="w-[100%] demo">
           <Table.Head>
             <Table.HeadCell className=" text-base bg-blackOlive text-flame">
@@ -179,6 +180,7 @@ export default function Logs() {
             )}
           </Table.Body>
         </Table>
+        </div>
         
         {
             !pageChangeLoader ?

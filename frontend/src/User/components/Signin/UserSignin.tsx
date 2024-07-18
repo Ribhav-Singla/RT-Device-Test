@@ -63,7 +63,7 @@ export default function UserSignin({ id ,setShowSignin }: { id :string,setShowSi
           transition={{
             duration: 0.5,
           }}
-          className="border-2 mx-7 rounded w-[400px] py-8 flex flex-col justify-center items-center container bg-white relative"
+          className="br border-2 mx-7 rounded w-[400px] py-8 flex flex-col justify-center items-center container bg-white relative"
         >
           <IoArrowBack
             className="absolute top-2 left-[3%] font-extrabold text-2xl cursor-pointer"
@@ -87,7 +87,7 @@ export default function UserSignin({ id ,setShowSignin }: { id :string,setShowSi
                       })}
                       placeholder="xxx"
                       autoFocus={true}
-                      className=" rounded-lg border-2 mt-3 bg-timerWolf text-black"
+                      className=" tb-input rounded-lg border-2 mt-3 bg-timerWolf text-black"
                     />
                     {showPassword ? (
                       <svg
@@ -110,7 +110,7 @@ export default function UserSignin({ id ,setShowSignin }: { id :string,setShowSi
                       </svg>
                     ) : (
                       <svg
-                        className="w-6 h-6 text-black absolute top-6 left-[75%] cursor-pointer"
+                        className="w-6 h-6 text-black absolute top-6 eye left-[80%] cursor-pointer"
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
                         height="24"
@@ -136,7 +136,7 @@ export default function UserSignin({ id ,setShowSignin }: { id :string,setShowSi
               <div className="mt-4 flex flex-col justify-center items-center w-full">
                 <button
                   type="submit"
-                  className="bg-red-500 rounded-lg  text-white text-lg font-bold px-5 py-2 w-[40%]"
+                  className="btn-enter bg-red-500 rounded-lg  text-white text-lg font-bold px-5 py-2 w-[40%]"
                 >
                   {btnLoader ? 'please wait...' : 'Enter'}
                 </button>

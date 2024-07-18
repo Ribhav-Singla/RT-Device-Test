@@ -34,17 +34,17 @@ export default function UserCard({
             ease: "linear",
           },
         }}
-        className="w-fit bg-white rounded-lg cursor-pointer h-fit"
+        className="w-fit card-bg rounded-lg cursor-pointer h-fit-crds"
         onClick={() => setShowSignin(true)}
       >
         <motion.div className="w-[190px] h-[180px] flex justify-center items-center">
           <img
             src={image ? `${import.meta.env.VITE_BACKEND_URL}/${image}` : "https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?size=338&ext=jpg&ga=GA1.1.2113030492.1720051200&semt=ais_user"}
             alt="User Image"
-            className="text-center max-h-[180px] object-contain"
+            className="text-center max-h-[180px] object-contain usr"
           />
         </motion.div>
-        <motion.h1 className="text-3xl font-bold px-2 pt-4 pb-4 max-w-[190px] text-black text-center">
+        <motion.h1 className="text-3xl font-bold px-2 pt-4 pb-4 max-w-[190px] text-black text-center name-emp">
           {name}
         </motion.h1>
       </motion.div>
