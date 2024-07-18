@@ -2,7 +2,6 @@ import DeviceCard from "../components/DeviceCard/DeviceCard";
 import { socket, socketState } from "../../socket";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
-import { v4 } from "uuid";
 
 interface Device {
   _id: string;
@@ -29,7 +28,11 @@ export default function AvailableDevices() {
         setDevices(data);        
       });
     }
-  }, []);
+
+    return ()=>{
+      socket.off('device list')
+    }
+  }, [socketStatus]);
 
   return (
     <>
@@ -40,7 +43,7 @@ export default function AvailableDevices() {
         <div className="p-4 mt-4 flex justify-center items-start flex-wrap gap-5">
           {devices.map((device) => {
             //@ts-ignore
-            return <DeviceCard device={device} key={device.id+v4()} />;
+            return <DeviceCard device={device} key={device._id} />;
           })}
         </div>
       </div>

@@ -36,7 +36,11 @@ export default function CurrentDevices() {
         setOriginalLogs(mylogs)
       });
     }
-  }, []);
+
+    return ()=>{
+      socket.off('mydevice list')
+    }
+  }, [socketStatus]);
 
   useEffect(()=>{
     let filteredLogs = originalLogs;
@@ -175,7 +179,7 @@ export default function CurrentDevices() {
                     
                       return (
                         //@ts-ignore
-                        <Table.Row key={log._id + v4()}>
+                        <Table.Row key={log._id}>
                           <Table.Cell className="font-semibold text-center p-0">
                             {
                               //@ts-ignore

@@ -46,7 +46,7 @@ export default function Users() {
         <div className="p-6 flex justify-center items-start flex-wrap gap-x-7 gap-y-7">
           {users.map((user) => (
             //@ts-ignore
-            <UserCard key={user.id} id={user._id} image={user.image} name={user.name} />
+            <UserCard key={user._id} id={user._id} image={user.image} name={user.name} />
           ))}
         </div>
       </div>
