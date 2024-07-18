@@ -3,7 +3,6 @@ import UserCard from "../components/UserCard/UserCard";
 import { FaSearch } from "react-icons/fa";
 import axios from "axios";
 import useDebouce from "../../hooks/useDebounce";
-import { v4 } from "uuid";
 
 export default function Users() {
   const [users, setUsers] = useState([]);
@@ -47,7 +46,7 @@ export default function Users() {
         <div className="p-6 flex justify-center items-start flex-wrap gap-spc">
           {users.map((user) => (
             //@ts-ignore
-            <UserCard key={user.id+v4()} id={user._id} image={user.image} name={user.name} />
+            <UserCard key={user.id} id={user._id} image={user.image} name={user.name} />
           ))}
         </div>
       </div>

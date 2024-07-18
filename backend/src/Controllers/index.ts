@@ -19,14 +19,16 @@ export const returnAllDevice = async () => {
         })
 
         for (const device of devices) {
-            const log = new Logs({
+            const log = await Logs.findOneAndUpdate({
                 //@ts-ignore
-                employee: device.bookedBy._id,
-                device: device._id,
-                loginTime: device.bookedDate,
-                logoutTime: new Date()
-            });
-            await log.save();
+                employee :  device.bookedBy._id,
+                device : device._id,
+                logoutTime : null
+            },{
+                logoutTime : Date.now()
+            },{
+                new : true
+            })
         }
 
         await getDevices();

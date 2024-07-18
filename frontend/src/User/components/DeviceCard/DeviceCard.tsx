@@ -75,10 +75,7 @@ export default function DeviceCard({ device }: { device: Device }) {
           />
         </motion.div>
         <motion.h1 className="text-2xl font-bold text-center pb-2 text-black text-box">
-          {device.model}
-        </motion.h1>
-        <motion.h1 className="text-2xl font-bold text-center pb-2 text-black text-box">
-          {device.company}
+          <span className="device-model">{device.model}{device.company}</span>
         </motion.h1>
         <div className="w-full flex justify-center items-center p-2">
           <button

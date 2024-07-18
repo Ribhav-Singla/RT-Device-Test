@@ -70,9 +70,9 @@ export default function ViewDevice() {
             <span className="text-4xl font-extrabold mt-1"></span>
           </div>
           <div className="mt-6 w-fit">
-            <h1 className="text-blue-500">isBooked:</h1>
+            <h1 className="text-blue-500">Booked:</h1>
             {/* @ts-ignore */}
-            <p className="text-4xl font-extrabold mt-1 text-floralWhite">{device.isBooked ? "True" : "False"}</p>
+            <p className="text-4xl font-extrabold mt-1 text-floralWhite">{device.isBooked ? "Yes" : "No"}</p>
           </div>
         </div>
       </div>
