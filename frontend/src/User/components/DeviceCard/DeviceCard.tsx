@@ -71,7 +71,7 @@ export default function DeviceCard({ device }: { device: Device }) {
               device.image ? `${import.meta.env.VITE_BACKEND_URL}/${device.image}` : Device
             }
             alt="User Image"
-            className="text-center object-contain max-h-[180px]"
+            className="text-center object-contain max-h-[180px] usr"
           />
         </motion.div>
         <motion.h1 className="text-2xl font-bold text-center pb-2 text-black text-box">

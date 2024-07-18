@@ -22,15 +22,17 @@ export default function AdminDashboard() {
 
   return (
     <>
-      <div className="grid grid-cols-12">
+      <div className="grid grid-cols-12 dev-det">
         <Sidebar/>
         <div className="grid col-span-9 lg:col-span-10 ">
+          <div className="details-device">
           <div className="flex justify-end pr-5 font-semibold p-3 border-b-2 border-black bg-flame" style={{borderBottomColor:"#CCC5B9"}}>
             <h1 className="cursor-pointer" onClick={handleSignOut}>Sign out</h1>
           </div>
           <div className=" min-h-screen">
             {/* we will render the corresponding components here... */}
             <Outlet/>
+          </div>
           </div>
         </div>
       </div>
