@@ -37,7 +37,7 @@ export default function UserCard({
         className="w-fit card-bg rounded-lg cursor-pointer h-fit-crds"
         onClick={() => setShowSignin(true)}
       >
-        <motion.div className="w-[190px] h-[180px] flex justify-center items-center">
+        <motion.div className="w-[100%] h-[180px] flex justify-center items-center">
           <img
             src={image ? `${import.meta.env.VITE_BACKEND_URL}/${image}` : "https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?size=338&ext=jpg&ga=GA1.1.2113030492.1720051200&semt=ais_user"}
             alt="User Image"

@@ -65,7 +65,7 @@ export default function DeviceCard({ device }: { device: Device }) {
         }}
         className="w-fit bg-white rounded-lg cursor-pointer h-fit flex-col justify-center items-center dev h-fit-crds"
       >
-        <motion.div className="w-[190px] h-[180px] flex justify-center items-center">
+        <motion.div className="w-[100%] h-[180px] flex justify-center items-center">
           <img
             src={
               device.image ? `${import.meta.env.VITE_BACKEND_URL}/${device.image}` : Device

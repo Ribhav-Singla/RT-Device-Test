@@ -31,8 +31,8 @@ export default function Users() {
       <div className="min-h-screen bg-white p-4 flex-col justify-center items-center main-sc">
         <div className=" flex justify-center items-center w-full mb-5 user-logo">
         <img src="/logo-es.png" alt="logo" className="esfera-logo"></img>
-        <h2 className="header-title">Hello</h2>
-        <div className="relative w-[50%]">
+        <h2 className="header-title">Device Management</h2>
+        <div className="relative">
             <input
               type="text"
               placeholder="Search..."
@@ -41,7 +41,7 @@ export default function Users() {
             />
             <FaSearch
               color="gray"
-              className="text-black-400 absolute top-4 left-[95%] mag"
+              className="text-black-400 absolute top-4 left-[85%] mag"
             />
           </div>
         </div>

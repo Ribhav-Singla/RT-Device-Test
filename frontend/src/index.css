@@ -117,9 +117,11 @@ button.btn-enter {
 /* 18-07-24 */
 .dev.h-fit-crds {
   height: 300px;
+  width: 200px;
+  object-fit: contain;
 }
 span.device-model {
-  font-size: 18px;
+  font-size: 16px;
   display: block;
   width: 100%;
   padding: 0px 10px;
@@ -142,6 +144,7 @@ button.btn-enter.device-btn {
   width: max-content;
   padding: 10px 20px;
   font-size: 16px;
+  color: #fff;
 }
 .esfera-logo{
   width: 200px;
@@ -152,8 +155,34 @@ button.btn-enter.device-btn {
   justify-content: space-between;
   background: black;
   padding: 0px 20px;
+  flex-flow: row wrap;
 }
+.mob.dev.h-fit-crds {
+  border-top-right-radius: 50px;
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 
+}
+.mob img.usr {
+  border-top-left-radius: 0px !important;
+  border-top-right-radius: 50px;
+}
+.cur{
+  border-radius: 20px;
+  margin: 0px 20px;
+}
+.cur .emp-name{
+  background-color: transparent;
+  color: #fff;
+  width: 100%;
+  text-align: center;
+  font-size: 30px;
+}
+h2.header-title {
+  color: white;
+  font-size: 30px;
+  padding: 20px 0px;
+}
 /* 18-07-24 */
 .overlay {
   position: fixed;
@@ -215,5 +244,21 @@ button.btn-enter.device-btn {
 }
 .dev-det .col-span-9 {
   grid-column: span 8 / span 8;
+}
+.grid-cols-12 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+.header {
+  background: black;
+  padding: 20px;
+}
+.up-img{
+  width: 100%;
+}
+input.rounded-full{
+  width: 100%;
+}
+.user-logo{
+  padding: 20px;
 }
 }

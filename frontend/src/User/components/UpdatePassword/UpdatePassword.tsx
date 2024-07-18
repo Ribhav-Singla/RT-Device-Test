@@ -96,9 +96,9 @@ export default function () {
                   onClick={() => setShowOldPassword(!showOldPassword)}
                 >
                   {!showOldPassword ? (
-                    <FaRegEye className="absolute top-4 left-[95%] text-black" />
+                    <FaRegEye className="absolute top-4 left-[90%] text-black" />
                   ) : (
-                    <FaEyeSlash className="absolute top-4 left-[95%] text-black" />
+                    <FaEyeSlash className="absolute top-4 left-[90%] text-black" />
                   )}
                 </div>
               </div>
@@ -129,9 +129,9 @@ export default function () {
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {!showPassword ? (
-                    <FaRegEye className="absolute top-4 left-[95%] text-black" />
+                    <FaRegEye className="absolute top-4 left-[90%] text-black" />
                   ) : (
-                    <FaEyeSlash className="absolute top-4 left-[95%] text-black" />
+                    <FaEyeSlash className="absolute top-4 left-[90%] text-black" />
                   )}
                 </div>
               </div>
@@ -165,9 +165,9 @@ export default function () {
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                 >
                   {!showConfirmPassword ? (
-                    <FaRegEye className="absolute top-4 left-[95%] text-black" />
+                    <FaRegEye className="absolute top-4 left-[90%] text-black" />
                   ) : (
-                    <FaEyeSlash className="absolute top-4 left-[95%] text-black" />
+                    <FaEyeSlash className="absolute top-4 left-[90%] text-black" />
                   )}
                 </div>
               </div>
@@ -188,7 +188,7 @@ export default function () {
 
             <button
               type="submit"
-              className=" bg-timerWolf text-blue-600 font-bold p-2 rounded  w-full"
+              className="btn-enter device-btn bg-timerWolf text-blue-600 font-bold p-2 rounded  w-full"
             >
               {btnLoader ? "Please wait..." : "Update"}
             </button>

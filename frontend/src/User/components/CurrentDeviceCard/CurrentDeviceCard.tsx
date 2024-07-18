@@ -62,9 +62,9 @@ export default function CurrentDeviceCard({ device }: { device: Device }) {
             ease: "linear",
           },
         }}
-        className="w-fit bg-white rounded-lg cursor-pointer h-fit flex-col justify-center items-center dev h-fit-crds"
+        className="w-fit bg-white rounded-lg cursor-pointer h-fit flex-col justify-center items-center mob dev h-fit-crds"
       >
-        <motion.div className="w-[190px] h-[180px] flex justify-center items-center">
+        <motion.div className="">
           <img
             src={
               device.image ? `${import.meta.env.VITE_BACKEND_URL}/${device.image}` : Device

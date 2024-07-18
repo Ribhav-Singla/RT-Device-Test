@@ -101,7 +101,7 @@ export default function () {
   return (
     <>
       <div className="flex justify-center items-center bg-white">
-        <div className="flex-col justify-center items-center p-14 w-[70%] md:w-[80%] lg:w-[60%]">
+        <div className="flex-col justify-center items-center p-14 w-[70%] md:w-[80%] lg:w-[60%] up-img">
           <form onSubmit={handleSubmit(onSubmit)}>
             {/* Image Div */}
 
@@ -185,7 +185,7 @@ export default function () {
             </div>
             <button
               type="submit"
-              className=" bg-timerWolf text-blue-600 font-bold p-2 rounded  w-full"
+              className=" btn-enter device-btn bg-timerWolf text-blue-600 font-bold p-2 rounded  w-full"
             >
               {btnLoader ? "Please wait..." : "Update Profile"}
             </button>

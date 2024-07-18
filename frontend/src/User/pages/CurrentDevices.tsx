@@ -81,12 +81,12 @@ export default function CurrentDevices() {
         </div>
         <hr />
       </div>
-      <div className="grid grid-cols-12 gap-x-5 p-5 dev-det">
-        <div className="col-span-5 shadow-2xl rounded-lg">
+      <div className="grid grid-cols-12 p-5 dev-det">
+        <div className="col-span-5 shadow-2xl rounded-lg cur gap-spc main-sc">
           <h1 className="text-lg font-extrabold p-3 pl-3 h-fit rounded-ss-lg rounded-se-lg  bg-gray-100 emp-name">
             Current Devices
           </h1>
-          <div className="min-h-screen flex justify-center items-start gap-5 px-2 py-4 flex-wrap">
+          <div className="min-h-screen flex justify-center items-start gap-5 px-2 py-4 flex-wrap cur">
             {
               devices &&
               devices[0] &&
