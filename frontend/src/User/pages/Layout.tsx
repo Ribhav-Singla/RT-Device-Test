@@ -66,6 +66,7 @@ export default function Layout() {
                 }else{
                   localStorage.removeItem("token");
                 }
+                navigate(0)
                 navigate("/users");
               }}
             >
