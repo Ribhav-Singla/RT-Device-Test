@@ -41,7 +41,7 @@ export default function UserCard({
           <img
             src={image ? `${import.meta.env.VITE_BACKEND_URL}/${image}` : "/user.png"}
             alt="User Image"
-            className="text-center max-h-[180px] object-contain usr"
+            className="text-center max-h-[180px] object-contain usr profile"
           />
         </motion.div>
         <motion.h1 className="text-3xl font-bold px-2 pt-4 pb-4 max-w-[190px] text-black text-center name-emp">

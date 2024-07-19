@@ -9,7 +9,7 @@ import { createServer } from 'http'
 import intializeSocket from './Route/socket'
 import { logRouter } from './Route/logs'
 
-mongoose.connect('mongodb://root:esfera%402023@127.0.0.1:27017/device?authSource=admin')
+mongoose.connect('mongodb+srv://ribhavsingla:65fRLQQa1jKtstQr@cluster0.fb6ouk3.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
     .then(() => console.log('db connected'))
     .catch((error) => console.log('error while connecting to db: ', error))
 

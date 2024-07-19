@@ -77,9 +77,9 @@ input {
 }
 img.usr {
   border-top-left-radius: 50px!important;
-  width: 100%;
+  width: 200px;
   height: 200px;
-  object-fit: contain;
+  object-fit: cover ;
   padding: 10px;
   border-radius: 25px;
 }
@@ -133,11 +133,11 @@ button.btn-enter.wait {
   object-fit: contain;
 }
 span.device-model {
-  font-size: 16px;
+  font-size: 14px;
   display: block;
   width: 100%;
   padding: 0px 10px;
-  color: white;
+  color: black;
 }
 .header{
   background: black;
