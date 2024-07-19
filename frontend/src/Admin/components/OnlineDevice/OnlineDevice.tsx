@@ -33,11 +33,13 @@ export default function OnlineDevice({id,name,model,company,empImage,deviceImage
       );
       toast.success(response.data.message);
       setBtnLoader(false);
+      setIsReturn(false)
     } catch (error) {
       console.log("error occured while return the device: ", error);
       //@ts-ignore
       toast.error(error.response.data.message);
       setBtnLoader(false);
+      setIsReturn(false)
     }
   };
 
