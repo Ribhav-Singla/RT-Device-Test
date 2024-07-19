@@ -19,7 +19,7 @@ export default function Sidebar({showSideBar}:{showSideBar:boolean}){
               Esferasoft Devices
             </h1>
           </Link>
-          <div className="absolute top-12 left-0 w-full sidebar-setting" >
+          <div className="absolute top-[4.5em] left-0 w-full sidebar-setting" >
             <div className="mt-2 pb-2 cursor-pointer select-none border-b-2 bg-eerieBlack">
               <Link to={'/admin/liveDashboard'}>
                 <p className="text-lg p-2 font-semibold pl-5 text-flame z-20">Dashboard</p>
