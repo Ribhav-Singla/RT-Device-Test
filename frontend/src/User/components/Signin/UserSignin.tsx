@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -11,46 +11,63 @@ type Inputs = {
   password: string;
 };
 
-export default function UserSignin({ id ,setShowSignin }: { id :string,setShowSignin: (showSignin:boolean)=>void }) {
+export default function UserSignin({ id ,showSignin,setShowSignin }: { id :string,showSignin:boolean,setShowSignin: (showSignin:boolean)=>void }) {
   const navigate = useNavigate();
+  const contRef = useRef<HTMLDivElement>(null);
   const [showPassword, setShowPassword] = useState(false);
-  const [btnLoader,setBtnLoader] = useState(false )
+  const [btnLoader, setBtnLoader] = useState(false);
   const {
     register,
     handleSubmit,
-    //@ts-ignore
     formState: { errors },
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    const formData = new FormData()
-    formData.append('password', data.password)
-    formData.append('id', id)
-    
-    try {
-      setBtnLoader(true)
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/signin`,formData,{
-        headers: {
-          'Content-Type': 'application/json',
-          }
-      }
-      )
-      localStorage.setItem('token',response.data.token)
-      toast.success('successfully signed in!')
-      setBtnLoader(false)
-      setShowSignin(false)
-      navigate('/user/availableDevices')
-    } catch (error) {
-      console.log('error: ',error)
-      //@ts-ignore
-      toast.error(error.response.data.message)
-      setBtnLoader(false)
+  const checkClickOutside = (e: MouseEvent) => {
+    if (contRef.current && !contRef.current.contains(e.target as Node)) {
+      setShowSignin(false);
     }
   };
+
+  useEffect(() => {
+    if (showSignin) {
+      document.addEventListener('mousedown', checkClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', checkClickOutside);
+    };
+  }, [showSignin]);
+
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    const formData = new FormData();
+    formData.append('password', data.password);
+    formData.append('id', id);
+    
+    try {
+      setBtnLoader(true);
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/signin`, formData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      localStorage.setItem('token', response.data.token);
+      toast.success('successfully signed in!');
+      setBtnLoader(false);
+      setShowSignin(false);
+      navigate('/user/availableDevices');
+    } catch (error) {
+      console.log('error: ', error);
+      //@ts-ignore
+      toast.error(error.response?.data?.message);
+      setBtnLoader(false);
+    }
+  };
+
   return (
     <>
       <div className="overlay">
         <motion.div
+          ref={contRef}
           initial={{
             scale: 0,
           }}
@@ -66,7 +83,7 @@ export default function UserSignin({ id ,setShowSignin }: { id :string,setShowSi
           className="br border-2 mx-7 rounded w-[400px] py-8 flex flex-col justify-center items-center container bg-white relative"
         >
           <IoArrowBack
-            className="absolute top-2 left-[3%]  cursor-pointer"
+            className="absolute top-2 left-[3%] cursor-pointer"
             onClick={() => setShowSignin(false)}
           />
           <h1 className="pass font-bold text-3xl text-slate-700 mb-2 pt-5 text-box">
@@ -87,7 +104,7 @@ export default function UserSignin({ id ,setShowSignin }: { id :string,setShowSi
                       })}
                       placeholder="xxx"
                       autoFocus={true}
-                      className=" tb-input rounded-lg border-2 mt-3 bg-timerWolf text-black"
+                      className="tb-input rounded-lg border-2 mt-3 bg-timerWolf text-black"
                     />
                     {showPassword ? (
                       <svg
@@ -136,7 +153,7 @@ export default function UserSignin({ id ,setShowSignin }: { id :string,setShowSi
               <div className="mt-4 flex flex-col justify-center items-center w-full">
                 <button
                   type="submit"
-                  className="btn-enter wait bg-red-500 rounded-lg  text-white text-lg font-bold px-5 py-2"
+                  className="btn-enter wait bg-red-500 rounded-lg text-white text-lg font-bold px-5 py-2"
                 >
                   {btnLoader ? 'please wait...' : 'Enter'}
                 </button>

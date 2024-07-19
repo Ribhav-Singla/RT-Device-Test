@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { FaRegEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
-import { useRecoilValueLoadable,useRecoilRefresher_UNSTABLE } from "recoil";
+import { useRecoilValueLoadable, useRecoilRefresher_UNSTABLE } from "recoil";
 import { userAtom } from "../../../recoil";
 
 type Inputs = {
@@ -46,11 +46,15 @@ export default function () {
       formData.append("password", data.password);
       const response = await axios.put(
         //@ts-ignore
-        `${import.meta.env.VITE_BACKEND_URL}/api/v1/user/changePassword/${user._id}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/user/changePassword/${ user._id}`,
         formData,
         {
           headers: {
-            Authorization: `Bearer ${sessionStorage.getItem('userLoginAllowed') ? sessionStorage.getItem('userLoginToken') : localStorage.getItem("token")}`,
+            Authorization: `Bearer ${
+              sessionStorage.getItem("userLoginAllowed")
+                ? sessionStorage.getItem("userLoginToken")
+                : localStorage.getItem("token")
+            }`,
             "Content-Type": "application/json",
           },
         }
@@ -58,7 +62,7 @@ export default function () {
 
       toast.success(response.data.message);
       console.log(response);
-      refresh()
+      refresh();
       setBtnLoader(false);
     } catch (error) {
       console.log("error: ", error);
@@ -77,35 +81,36 @@ export default function () {
           </h1>
           <form onSubmit={handleSubmit(onSubmit)}>
             {/* old password */}
-            {
-              !resetPassword ? <div className="mb-5">
-              <label className="text-black">Old password: </label>
-              <br />
-              <div className="relative">
-                <input
-                  {...register("oldPassword", {
-                    required: resetPassword
-                      ? false
-                      : "Old password is required!",
-                  })}
-                  type={showOldPassword ? "text" : "password"}
-                  className="w-full pl-2 text-eerieBlack border-none rounded-md bg-timerWolf"
-                />
-                <div
-                  className=" cursor-pointer"
-                  onClick={() => setShowOldPassword(!showOldPassword)}
-                >
-                  {!showOldPassword ? (
-                    <FaRegEye className="absolute top-4 left-[90%] text-black" />
-                  ) : (
-                    <FaEyeSlash className="absolute top-4 left-[90%] text-black" />
-                  )}
+            {!resetPassword ? (
+              <div className="mb-5">
+                <label className="text-black">Old password: </label>
+                <br />
+                <div className="relative">
+                  <input
+                    {...register("oldPassword", {
+                      required: resetPassword
+                        ? false
+                        : "Old password is required!",
+                    })}
+                    type={showOldPassword ? "text" : "password"}
+                    className="w-full pl-2 text-eerieBlack border-none rounded-md bg-timerWolf"
+                  />
+                  <div
+                    className=" cursor-pointer"
+                    onClick={() => setShowOldPassword(!showOldPassword)}
+                  >
+                    {!showOldPassword ? (
+                      <FaRegEye className="absolute top-4 left-[90%] text-black" />
+                    ) : (
+                      <FaEyeSlash className="absolute top-4 left-[90%] text-black" />
+                    )}
+                  </div>
                 </div>
+                <p className="text-red-500">{errors.oldPassword?.message}</p>
               </div>
-              <p className="text-red-500">{errors.oldPassword?.message}</p>
-            </div>
-            :""
-            }
+            ) : (
+              ""
+            )}
 
             {/* New Password */}
             <div className="mb-5">
@@ -119,6 +124,12 @@ export default function () {
                       value: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{6,}$/,
                       message:
                         "Password must contain a capital letter, small letter, a digit, a special charcter and minimum of 6",
+                    },
+                    validate: (value) => {
+                      if (value.trim() !== value) {
+                        return "Password cannot start or end with blank spaces";
+                      }
+                      return undefined;
                     },
                   })}
                   type={showPassword ? "text" : "password"}

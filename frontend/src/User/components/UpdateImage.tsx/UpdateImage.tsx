@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { RiImageAddFill } from "react-icons/ri";
 import Spinner from "../../../Common/Spinner";
-import { useRecoilValueLoadable,useRecoilRefresher_UNSTABLE } from "recoil";
+import { useRecoilValueLoadable, useRecoilRefresher_UNSTABLE } from "recoil";
 import { userAtom } from "../../../recoil";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -72,15 +72,19 @@ export default function () {
         formData,
         {
           headers: {
-            Authorization: `Bearer ${sessionStorage.getItem('userLoginAllowed') ? sessionStorage.getItem('userLoginToken') : localStorage.getItem("token")}`,
+            Authorization: `Bearer ${
+              sessionStorage.getItem("userLoginAllowed")
+                ? sessionStorage.getItem("userLoginToken")
+                : localStorage.getItem("token")
+            }`,
             "Content-Type": "application/json",
           },
         }
       );
-      
+
       toast.success(response.data.message);
       console.log(response);
-      refresh()
+      refresh();
       setBtnLoader(false);
     } catch (error) {
       console.log("error: ", error);
@@ -155,10 +159,28 @@ export default function () {
                       type="file"
                       accept=".png, .jpeg, .jpg"
                       ref={fileInputRef}
-                      className=" hidden"
+                      className="hidden"
                       onChange={(e) => {
                         if (e.target.files && e.target.files[0]) {
-                          setImage(e.target.files[0]);
+                          const file = e.target.files[0];
+                          const fileType = file.type;
+                          const fileSize = file.size;
+
+                          if (
+                            fileType !== "image/png" &&
+                            fileType !== "image/jpeg" &&
+                            fileType !== "image/jpg"
+                          ) {
+                            toast.error("Only PNG, JPEG, and JPG files are allowed");
+                            return;
+                          }
+
+                          if (fileSize > 5 * 1024 * 1024) {
+                            toast.error("File size must not exceed 5MB");
+                            return;
+                          }
+
+                          setImage(file);
                         }
                       }}
                     />
@@ -174,6 +196,15 @@ export default function () {
                 <input
                   {...register("name", {
                     required: "Name is required!",
+                    pattern: {
+                      value: /^[a-zA-Z][a-zA-Z ]*$/,
+                      message:
+                        "Name must start with a letter and contain only letters",
+                    },
+                    maxLength: {
+                      value: 15,
+                      message: "Name cannot be longer than 15 characters",
+                    },
                   })}
                   placeholder="Name"
                   //@ts-ignore

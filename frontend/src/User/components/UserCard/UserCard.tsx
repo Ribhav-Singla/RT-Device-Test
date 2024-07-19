@@ -51,7 +51,7 @@ export default function UserCard({
 
       {showSignin ? (
         <AnimatePresence>
-          <UserSignin id={id} setShowSignin={setShowSignin} />
+          <UserSignin id={id} showSignin={showSignin} setShowSignin={setShowSignin} />
         </AnimatePresence>
       ) : (
         ""
