@@ -38,7 +38,7 @@ deviceRouter.get("/bulk", adminAuth, async (req, res) => {
     })
       .skip(skip)
       .limit(limit)
-      .sort({ 'createdAt': -1 })
+      .sort({'createdAt': -1 })
     const totalDevices = await Device.find({
       $or: [
         { model: { $regex: filter, $options: "i" } },
