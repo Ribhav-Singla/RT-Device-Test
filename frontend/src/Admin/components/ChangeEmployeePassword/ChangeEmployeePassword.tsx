@@ -105,6 +105,12 @@ export default function () {
                     message:
                       "Password must contain a capital letter, small letter, a digit, a special charcter and minimum of 6",
                   },
+                  validate: (value) => {
+                    if (value.trim() !== value) {
+                      return "Password cannot start or end with blank spaces";
+                    }
+                    return undefined;
+                  },
                 })}
                 type={showPassword ? "text" : "password"}
                 className="w-full pl-2 text-floralWhite border-none rounded-md bg-blackOlive"

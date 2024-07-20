@@ -1,5 +1,5 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import axios from "axios";
 import Spinner from "../../Common/Spinner";
@@ -20,10 +20,12 @@ export default function AddEmployee() {
   const [btnLoader, setBtnLoader] = useState(false);
   const [image, setImage] = useState<File | string>("");
   const [showPassword, setShowPassword] = useState(false);
+  const imageRef = useRef(null);
 
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<Inputs>();
 
@@ -44,11 +46,10 @@ export default function AddEmployee() {
         await new Promise((r) => setTimeout(r, 1000));
         return response.data.url;
       } catch (error) {
-        return error
+        return error;
       }
-    }
-    else{
-      return ""
+    } else {
+      return "";
     }
   };
 
@@ -75,7 +76,7 @@ export default function AddEmployee() {
       await new Promise((r) => setTimeout(r, 1000));
       toast.success(response.data.message);
       setBtnLoader(false);
-      navigate('/admin/employees')
+      navigate("/admin/employees");
     } catch (error) {
       await new Promise((r) => setTimeout(r, 1000));
       setBtnLoader(false);
@@ -105,7 +106,18 @@ export default function AddEmployee() {
                   Name
                 </label>
                 <input
-                  {...register("name", { required: "Name is required!" })}
+                  {...register("name", {
+                    required: "Name is required!",
+                    maxLength: {
+                      value: 15,
+                      message: "Name cannot exceed 15 characters!",
+                    },
+                  })}
+                  onBlur={(e) => {
+                    const trimmedValue = e.target.value.trim();
+                    //@ts-ignore
+                    setValue(e.target.name, trimmedValue);
+                  }}
                   autoFocus={true}
                   className="w-full pl-2 bg-eerieBlack text-floralWhite"
                 />
@@ -123,6 +135,11 @@ export default function AddEmployee() {
                       message: "Invalid email address",
                     },
                   })}
+                  onBlur={(e) => {
+                    const trimmedValue = e.target.value.trim();
+                    //@ts-ignore
+                    setValue(e.target.name, trimmedValue);
+                  }}
                   className="w-full pl-2 bg-eerieBlack text-floralWhite"
                 />
                 <p className="text-red-500">{errors.email?.message}</p>
@@ -142,6 +159,11 @@ export default function AddEmployee() {
                           "Password must contain a capital letter, small letter, a digit, a special charcter and minimum of 6",
                       },
                     })}
+                    onBlur={(e) => {
+                      const trimmedValue = e.target.value.trim();
+                      //@ts-ignore
+                      setValue(e.target.name, trimmedValue);
+                    }}
                     type={showPassword ? "text" : "password"}
                     className="w-full pl-2 bg-eerieBlack text-floralWhite border-none rounded-md "
                   />
@@ -167,11 +189,36 @@ export default function AddEmployee() {
                       </label>
                       <div className="w-full">
                         <input
+                          ref={imageRef}
                           type="file"
                           accept=".png, .jpeg, .jpg"
                           onChange={(e) => {
                             if (e.target.files && e.target.files[0]) {
-                              setImage(e.target.files[0]);
+                              const file = e.target.files[0];
+                              const fileType = file.type;
+                              const fileSize = file.size;
+
+                              if (
+                                ![
+                                  "image/png",
+                                  "image/jpeg",
+                                  "image/jpg",
+                                ].includes(fileType)
+                              ) {
+                                toast.error(
+                                  "Only PNG, JPEG, and JPG files are allowed"
+                                );
+                                e.target.value = ""; // reset the input value
+                                return;
+                              }
+
+                              if (fileSize > 5 * 1024 * 1024) {
+                                toast.error("File size must not exceed 5MB");
+                                e.target.value = ""; // reset the input value
+                                return;
+                              }
+
+                              setImage(file);
                             }
                           }}
                           className="text-floralWhite w-full bg-eerieBlack rounded-md"
@@ -181,15 +228,24 @@ export default function AddEmployee() {
                     </div>
 
                     <div className="flex justify-start items-center gap-3">
-                      <div
+                      {
+                        image ? 
+                        <div
                         className="relative cursor-pointer text-red-500 flex flex-col justify-center items-center hover-container"
-                        onClick={() => setImage("")}
+                        onClick={() => {
+                          setImage("")
+                          if(imageRef.current){
+                            //@ts-ignore
+                            imageRef.current.value =""
+                          }
+                        }}
                       >
                         <RiDeleteBin6Line size={22} className="ml-2" />
                         <span className="absolute hidden text-floralWhite bg-blackOlive p-1 border-2 ml-1 rounded-lg mt-2 hover-text-content">
                           remove
                         </span>
-                      </div>
+                      </div> : ""
+                      }
                     </div>
                   </div>
                   <div className="flex justify-center items-center w-[130px] h-[105px] bg-eerieBlack rounded">

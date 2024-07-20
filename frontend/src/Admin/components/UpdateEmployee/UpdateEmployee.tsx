@@ -1,5 +1,5 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import axios from "axios";
 import Spinner from "../../../Common/Spinner";
@@ -19,10 +19,12 @@ export default function () {
   const [image, setImage] = useState<File | string>("");
   const [employeeData, setEmployeeData] = useState("");
   const [loading, setLoading] = useState(true);
+  const imageRef = useRef(null)
 
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<Inputs>();
 
@@ -74,15 +76,17 @@ export default function () {
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
-    setBtnLoader(true);
-    const imageURL = await uploadImage();
-    const formData = new FormData();
-    formData.append("name", data.name);
-    formData.append("email", data.email);
-    formData.append("image", imageURL);
+      setBtnLoader(true);
+      const imageURL = await uploadImage();
+      const formData = new FormData();
+      formData.append("name", data.name);
+      formData.append("email", data.email);
+      formData.append("image", imageURL);
 
       const response = await axios.put(
-        `${import.meta.env.VITE_BACKEND_URL}/api/v1/admin/employee/update/${id}`,
+        `${
+          import.meta.env.VITE_BACKEND_URL
+        }/api/v1/admin/employee/update/${id}`,
         formData,
         {
           headers: {
@@ -118,10 +122,12 @@ export default function () {
         <div className="flex flex-col justify-center items-center rounded md:max-w-[450px] lg:max-w-[600px] w-full px-3 pb-5 bg-blackOlive">
           <div className=" p-3 mb-5 text-center w-full">
             <h1 className="text-2xl font-bold w-full text-floralWhite">
-              Update {
+              Update{" "}
+              {
                 //@ts-ignore
-              employeeData.name
-              } info
+                employeeData.name
+              }{" "}
+              info
             </h1>
           </div>
           <div className="w-full">
@@ -135,7 +141,18 @@ export default function () {
                   Name
                 </label>
                 <input
-                  {...register("name", { required: "Name is required!" })}
+                  {...register("name", {
+                    required: "Name is required!",
+                    maxLength: {
+                      value: 15,
+                      message: "Name cannot exceed 15 characters!",
+                    },
+                  })}
+                  onBlur={(e) => {
+                    const trimmedValue = e.target.value.trim();
+                    //@ts-ignore
+                    setValue(e.target.name, trimmedValue);
+                  }}
                   //@ts-ignore
                   defaultValue={employeeData.name}
                   className="w-full pl-2 bg-eerieBlack text-floralWhite"
@@ -154,6 +171,11 @@ export default function () {
                       message: "Invalid email address",
                     },
                   })}
+                  onBlur={(e) => {
+                    const trimmedValue = e.target.value.trim();
+                    //@ts-ignore
+                    setValue(e.target.name, trimmedValue);
+                  }}
                   //@ts-ignore
                   defaultValue={employeeData.email}
                   className="w-full pl-2 bg-eerieBlack text-floralWhite"
@@ -169,12 +191,37 @@ export default function () {
                       </label>
                       <div className="w-full">
                         <input
+                          ref={imageRef}
                           type="file"
-                          accept=".png, .jpeg, .jpg"
+                          accept=".png,.jpeg,.jpg"
                           className="text-floralWhite w-full bg-eerieBlack rounded-md"
                           onChange={(e) => {
                             if (e.target.files && e.target.files[0]) {
-                              setImage(e.target.files[0]);
+                              const file = e.target.files[0];
+                              const fileType = file.type;
+                              const fileSize = file.size;
+
+                              if (
+                                ![
+                                  "image/png",
+                                  "image/jpeg",
+                                  "image/jpg",
+                                ].includes(fileType)
+                              ) {
+                                toast.error(
+                                  "Only PNG, JPEG, and JPG files are allowed"
+                                );
+                                e.target.value = ""; // reset the input value
+                                return;
+                              }
+
+                              if (fileSize > 5 * 1024 * 1024) {
+                                toast.error("File size must not exceed 5MB");
+                                e.target.value = ""; // reset the input value
+                                return;
+                              }
+
+                              setImage(file);
                             }
                           }}
                         />
@@ -185,7 +232,13 @@ export default function () {
                     <div className="flex justify-start items-center gap-3">
                       <div
                         className="relative cursor-pointer text-red-500 flex flex-col justify-center items-center hover-container"
-                        onClick={() => setImage("")}
+                        onClick={() => {
+                          setImage("")
+                          if(imageRef.current){
+                            //@ts-ignore
+                            imageRef.current.value = ""
+                          }
+                        }}
                       >
                         <RiDeleteBin6Line size={22} className="ml-2" />
                         <span className="absolute hidden text-floralWhite bg-blackOlive p-1 border-2 ml-1 rounded-lg mt-2 hover-text-content">
