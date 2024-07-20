@@ -4,9 +4,9 @@ import { Employee } from '../../Models/Employee';
 import { Logs } from '../../Models/Logs';
 import jwt from 'jsonwebtoken'
 import { userAuth } from '../../Middleware/user';
-import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import { getAdminDevices, getDevices, myDevices } from '../socket';
+import { userPasswordSchema, userProfileSchema, userSigninSchema } from '../../zod';
 
 export const userRouter = express.Router()
 
@@ -43,6 +43,12 @@ userRouter.get('/me', userAuth, async (req, res) => {
 userRouter.post('/signin', async (req, res) => {
     const id = req.body.id
     const password = req.body.password
+
+    const {success,error} = userSigninSchema.safeParse({id,password});
+    if(error){
+        console.log('error occured while parsing user signin: ',error);
+        return res.status(400).json({error: 'Invalid Request.'})
+    } 
 
     try {
         const user = await Employee.findById(id)
@@ -221,6 +227,15 @@ userRouter.post('/returnDevice/:id', userAuth, async (req, res) => {
 })
 
 userRouter.put('/updateProfile/:id', userAuth, async (req, res) => {
+    const name = req.body.name
+    const image = req.body.image    
+    const {success,error} = userProfileSchema.safeParse({name,image})
+    
+    if(error){
+        console.log('error in parsing user profile: ',error);
+        return res.status(400).json({error: 'Invalid Inputs'})
+    }
+
     try {
         await Employee.findByIdAndUpdate({
             _id: req.params.id
@@ -242,6 +257,16 @@ userRouter.put('/updateProfile/:id', userAuth, async (req, res) => {
 })
 
 userRouter.put('/changePassword/:id', userAuth, async (req, res) => {
+    
+    const oldPassword = req.body.oldPassword
+    const password = req.body.password
+    const {success,error} = userPasswordSchema.safeParse({oldPassword,password})
+
+    if(error){
+        console.log('error in parsing user password: ',error);
+        return res.status(400).json({error: 'Invalid Inputs'})
+    }
+
     const salt = bcrypt.genSaltSync(10);
     try {
         if (req.body.oldPassword) {
@@ -254,7 +279,7 @@ userRouter.put('/changePassword/:id', userAuth, async (req, res) => {
             }
         }
         
-        const hash = bcrypt.hashSync(req.body.password, salt)
+        const hash = bcrypt.hashSync(req.body.password.trim(), salt)
         await Employee.findByIdAndUpdate({
             _id: req.params.id
         }, {
