@@ -1,5 +1,5 @@
 import { Table } from "flowbite-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Spinner from "../../Common/Spinner";
 import Pager from "../../Common/Pager";
@@ -26,6 +26,42 @@ export default function Logs() {
   const [filterselectedEmployees,setFilterSelectedEmployees] = useState<String[]>([])
   const [filterselectedDevices,setFilterSelectedDevices] = useState<String[]>([])
   const [filterDate,setFilterDate] = useState("") 
+  const employeeContRef = useRef<HTMLDivElement>(null)
+  const deviceContRef = useRef<HTMLDivElement>(null)
+  const dateContRef = useRef<HTMLDivElement>(null)
+
+  function checkClickOutsideEmployee(e:MouseEvent){
+    if(employeeContRef.current && !employeeContRef.current.contains(e.target as Node)){
+      setShowEmployee(false);
+    }
+  }
+  function checkClickOutsideDevice(e:MouseEvent){
+    if(deviceContRef.current && !deviceContRef.current.contains(e.target as Node)){
+      setShowDevice(false);
+    }
+  }
+  function checkClickOutsideDate(e:MouseEvent){
+    if(dateContRef.current && !dateContRef.current.contains(e.target as Node)){
+      setShowDate(false);
+    }
+  }
+
+  useEffect(()=>{
+    if(showEmployee){
+      document.addEventListener('mousedown',checkClickOutsideEmployee);
+    }
+    if(showDevice){
+      document.addEventListener('mousedown',checkClickOutsideDevice);
+    }
+    if(showDate){
+      document.addEventListener('mousedown',checkClickOutsideDate);
+    }
+    return ()=>{
+      document.removeEventListener('mousedown',checkClickOutsideEmployee);
+      document.removeEventListener('mousedown',checkClickOutsideDevice);
+      document.removeEventListener('mousedown',checkClickOutsideDate);
+    }
+  },[showEmployee,showDevice,showDate])
 
   useEffect(() => {
     async function getData() {
@@ -64,67 +100,77 @@ export default function Logs() {
           </h1>
           <div className="flex-col justify-center items-center gap-2">
             <div className="flex justify-center items-center gap-3">
-              <div className="flex justify-center items-center border-2 rounded-lg p-2 gap-4 cursor-pointer w-full" onClick={()=>{
-                setShowEmployee(!showEmployee)
-                if(showDate) setShowDate(false)
-                if(showDevice) setShowDevice(false)
-              }}>
-                  <h1 className="text-floralWhite rounded-lg">Employee</h1>
-                  {
-                    !showEmployee ? <IoMdArrowDropdown size={25} color="white"/> : <IoMdArrowDropup size={25} color="white"/>
-                  }
-              </div>
-              <div className="flex justify-center items-center border-2 rounded-lg p-2 gap-4 cursor-pointer" onClick={()=>{
-                setShowDevice(!showDevice)
-                if(showDate) setShowDate(false)
-                if(showEmployee) setShowEmployee(false)
-              }}>
-                  <h1 className="text-floralWhite rounded-lg">Device</h1>
-                  {
-                    !showDevice ? <IoMdArrowDropdown size={25} color="white"/> : <IoMdArrowDropup size={25} color="white"/>
-                  }
-              </div>
-              <div className="flex justify-center items-center border-2 rounded-lg p-2 gap-4 cursor-pointer" onClick={()=>{
-                setShowDate(!showDate)
-                if(showDevice) setShowDevice(false)
-                if(showEmployee) setShowEmployee(false)
-              }}>
-                  <h1 className="text-floralWhite rounded-lg">Date</h1>
-                  {
-                    !showDate ? <IoMdArrowDropdown size={25} color="white"/> : <IoMdArrowDropup size={25} color="white"/>
-                  }
-              </div>
-            </div>
-            <div className="relative flex justify-center w-full">
-              {
-                //@ts-ignore
-                showEmployee ? <EmployeeFilter filterselectedEmployees={filterselectedEmployees} setFilterSelectedEmployees={setFilterSelectedEmployees} setPage={setPage}/> : ""
-              }
-              {
-                //@ts-ignore
-                showDevice ? <DeviceFilter filterselectedDevices={filterselectedDevices} setFilterSelectedDevices={setFilterSelectedDevices} setPage={setPage}/> : ""
-              }
-              {
-                showDate ? 
-                <motion.div initial={{
-                  scale:0.5
-                }}
-                animate={{
-                  scale:1
-                }} className="max-w-[60%] mt-2 absolute top-0 left-0 z-10">
-                  <Datepicker 
-                    defaultValue={Date.now()}
-                    onSelectedDateChanged={
-                      //@ts-ignore
-                      (e:SetStateAction<string>)=>{
-                        setFilterDate(e)
-                        setPage(1)
+              <div className="relative" ref={employeeContRef}>
+                  <div className="flex justify-center items-center border-2 rounded-lg p-2 gap-4 cursor-pointer w-full" onClick={()=>{
+                    setShowEmployee(!showEmployee)
+                    if(showDate) setShowDate(false)
+                    if(showDevice) setShowDevice(false)
+                  }}>
+                      <h1 className="text-floralWhite rounded-lg">Employee</h1>
+                      {
+                        !showEmployee ? <IoMdArrowDropdown size={25} color="white"/> : <IoMdArrowDropup size={25} color="white"/>
                       }
-                      
-                  }/>
-                </motion.div> 
-                : ""
-              }
+                  </div>
+                  <div className="w-[190px] absolute">
+                      {
+                        //@ts-ignore
+                        showEmployee ? <EmployeeFilter filterselectedEmployees={filterselectedEmployees} setFilterSelectedEmployees={setFilterSelectedEmployees} setPage={setPage}/> : ""
+                      }
+                  </div>
+              </div>
+              <div className="relative" ref={deviceContRef}>
+                  <div className="flex justify-center items-center border-2 rounded-lg p-2 gap-4 cursor-pointer" onClick={()=>{
+                    setShowDevice(!showDevice)
+                    if(showDate) setShowDate(false)
+                    if(showEmployee) setShowEmployee(false)
+                  }}>
+                      <h1 className="text-floralWhite rounded-lg">Device</h1>
+                      {
+                        !showDevice ? <IoMdArrowDropdown size={25} color="white"/> : <IoMdArrowDropup size={25} color="white"/>
+                      }
+                  </div>
+                  <div className="w-[180px] absolute">
+                      {
+                        //@ts-ignore
+                        showDevice ? <DeviceFilter filterselectedDevices={filterselectedDevices} setFilterSelectedDevices={setFilterSelectedDevices} setPage={setPage}/> : ""
+                      }
+                  </div>
+              </div>
+              <div className="relative" ref={dateContRef}>
+                  <div className="flex justify-center items-center border-2 rounded-lg p-2 gap-4 cursor-pointer" onClick={()=>{
+                    setShowDate(!showDate)
+                    if(showDevice) setShowDevice(false)
+                    if(showEmployee) setShowEmployee(false)
+                  }}>
+                      <h1 className="text-floralWhite rounded-lg">Date</h1>
+                      {
+                        !showDate ? <IoMdArrowDropdown size={25} color="white"/> : <IoMdArrowDropup size={25} color="white"/>
+                      }
+                  </div>
+                  <div className="w-[140px]">
+                      {
+                        showDate ? 
+                        <motion.div initial={{
+                          scale:0.5
+                        }}
+                        animate={{
+                          scale:1
+                        }} className="max-w-[100%] mt-2 absolute left-[-16.2rem] z-10">
+                          <Datepicker 
+                            defaultValue={Date.now()}
+                            onSelectedDateChanged={
+                              //@ts-ignore
+                              (e:SetStateAction<string>)=>{
+                                setFilterDate(e)
+                                setPage(1)
+                              }
+                              
+                          }/>
+                        </motion.div> 
+                        : ""
+                    }
+                  </div>
+              </div>
             </div>
           </div>
         </div>
