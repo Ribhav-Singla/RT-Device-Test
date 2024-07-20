@@ -3,6 +3,7 @@ import { Admin } from "../../Models/Admin"
 import jwt from 'jsonwebtoken'
 import { Employee } from "../../Models/Employee"
 import { adminAuth } from "../../Middleware/admin"
+import { adminSigninSchema } from "../../zod"
 
 export const authRouter = express.Router()
 
@@ -20,6 +21,16 @@ authRouter.get('/me',adminAuth,async(req,res)=>{
 })
 
 authRouter.post('/signin', async (req, res) => {
+
+    const email = req.body.email
+    const password = req.body.password
+    const {success,error} = adminSigninSchema.safeParse({email,password})
+
+    if(error){
+        console.log('error occured while parsing admin signin: ',error);
+        return res.status(400).json({error : 'Invalid Inputs'})
+    }
+
     try {
         const admin = await Admin.findOne({
             email: req.body.email,

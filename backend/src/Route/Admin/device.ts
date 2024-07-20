@@ -2,10 +2,9 @@ import express from "express";
 import { Device } from "../../Models/Device";
 import { adminAuth } from "../../Middleware/admin";
 import { Employee } from "../../Models/Employee";
-import { returnAllDevice } from "../../Controllers";
-import mongoose from "mongoose";
 import { getAdminDevices, getDevices, myDevices } from "../socket";
 import { Logs } from "../../Models/Logs";
+import { adminDeviceSchema } from "../../zod";
 
 export const deviceRouter = express.Router();
 
@@ -79,10 +78,19 @@ deviceRouter.get("/:id", adminAuth, async (req, res) => {
 
 deviceRouter.post("/create", adminAuth, async (req, res) => {
 
+  const model = req.body.model
+  const company = req.body.company
+  const image = req.body.image
+  const {success,error} = adminDeviceSchema.safeParse({model,company,image})
+  if(error){
+    console.log('error occured while parsing admin device: ',error);
+    return res.status(400).json({error:"Invalid data"})
+  }
+
   try {
     const device = new Device({
-      model: req.body.model,
-      company: req.body.company,
+      model: req.body.model.trim(),
+      company: req.body.company.trim(),
       image: req.body.image
     });
     await device.save();
@@ -98,6 +106,16 @@ deviceRouter.post("/create", adminAuth, async (req, res) => {
 });
 
 deviceRouter.put("/update/:id", adminAuth, async (req, res) => {
+
+  const model = req.body.model
+  const company = req.body.company
+  const image = req.body.image
+  const {success,error} = adminDeviceSchema.safeParse({model,company,image})
+  if(error){
+    console.log('error occured while parsing admin device update: ',error);
+    return res.status(400).json({error:"Invalid data"})
+  }
+
   try {
     await Device.findByIdAndUpdate(
       {

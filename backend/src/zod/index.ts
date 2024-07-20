@@ -18,3 +18,14 @@ export const userPasswordSchema = z.object({
 export const adminLogStatusSchema = z.object({
     status: z.enum(['Accepted', 'Rejected'])
 })
+
+export const adminSigninSchema = z.object({
+    email : z.string().email(),
+    password : z.string()
+})
+
+export const adminDeviceSchema = z.object({
+    model : z.string().max(15).trim(),
+    company : z.string().max(15).trim(),
+    image : z.string()
+})
