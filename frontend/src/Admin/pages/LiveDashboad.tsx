@@ -56,7 +56,11 @@ export default function LiveDashboad() {
           <h1 className="text-xl text-floralWhite pl-3 pt-3 pb-3">
             Online Users
           </h1>
-          <button className="text-white bg-blue-600 p-2 rounded-lg logoff" onClick={()=>setIsReturnAll(!isReturnAll)}>Return all</button>
+          <button className="text-white bg-blue-600 p-2 rounded-lg logoff" onClick={()=>{
+              if(adminDevices.length > 0){
+                setIsReturnAll(!isReturnAll)
+              }
+            }}>Return all</button>
         </div>
         <div className="flex justify-start items-start flex-wrap p-3 gap-x-3 gap-y-5">
           {adminDevices.length >0 ? adminDevices.map((device, index) => {

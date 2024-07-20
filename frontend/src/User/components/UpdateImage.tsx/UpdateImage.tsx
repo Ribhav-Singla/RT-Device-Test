@@ -24,6 +24,7 @@ export default function () {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<Inputs>();
 
@@ -196,16 +197,16 @@ export default function () {
                 <input
                   {...register("name", {
                     required: "Name is required!",
-                    pattern: {
-                      value: /^[a-zA-Z][a-zA-Z ]*$/,
-                      message:
-                        "Name must start with a letter and contain only letters",
-                    },
                     maxLength: {
                       value: 15,
                       message: "Name cannot be longer than 15 characters",
                     },
                   })}
+                  onBlur={(e) => {
+                    const trimmedValue = e.target.value.trim();
+                    //@ts-ignore
+                    setValue(e.target.name, trimmedValue);
+                  }}
                   placeholder="Name"
                   //@ts-ignore
                   defaultValue={user.name}
