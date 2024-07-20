@@ -53,7 +53,7 @@ export default function ({
                 }}
                 animate={{
                   scale:1
-                }} className="flex-col justify-center items-center max-w-[60%] absolute top-0 left-0 z-10">
+                }} className="flex-col justify-center items-center max-w-[100%] absolute top-0 left-0 z-10">
         <div className="relative  mt-2">
           <input
             type="text"
