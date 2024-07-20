@@ -29,3 +29,19 @@ export const adminDeviceSchema = z.object({
     company : z.string().max(15).trim(),
     image : z.string()
 })
+
+export const adminEmployeeSchema = z.object({
+    name: z.string().max(15).trim(),
+    email: z.string().email(),
+    password: z.string().trim().regex(
+      /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{6,}$/,
+      'Password must be at least 6 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character'
+    ),
+    image: z.string()
+})
+
+export const adminEmployeeUpdateSchema = z.object({
+    name: z.string().max(15).trim(),
+    email: z.string().email(),
+    image : z.string()
+})

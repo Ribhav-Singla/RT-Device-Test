@@ -2,6 +2,7 @@ import express from 'express'
 import { Employee } from '../../Models/Employee'
 import { adminAuth } from '../../Middleware/admin'
 import bcrypt from 'bcryptjs'
+import { adminEmployeeSchema, adminEmployeeUpdateSchema, userPasswordSchema } from '../../zod'
 
 export const employeeRouter = express.Router()
 
@@ -66,12 +67,22 @@ employeeRouter.get('/:id', adminAuth, async (req, res) => {
 })
 
 employeeRouter.post('/create', adminAuth, async (req, res) => {
+
+    const name = req.body.name
+    const email = req.body.email
+    const password = req.body.password
+    const image = req.body.image
+    const {success,error} = adminEmployeeSchema.safeParse({name,email,password,image})
+    if(error){
+        console.log('error occured while parsing admin employee schema: ',error);
+        return res.status(400).json({error:'Invalid Inputs'})
+    }
     
     try {
         const salt = bcrypt.genSaltSync(10);
-        const hash = bcrypt.hashSync(req.body.password, salt);
+        const hash = bcrypt.hashSync(req.body.password.trim(), salt);
         const employee = new Employee({
-            name: req.body.name,
+            name: req.body.name.trim(),
             email: req.body.email,
             password: hash,
             image: req.body.image
@@ -97,6 +108,16 @@ employeeRouter.post('/create', adminAuth, async (req, res) => {
 })
 
 employeeRouter.put('/update/:id', adminAuth, async (req, res) => {
+
+    const name = req.body.name
+    const email = req.body.email
+    const image = req.body.image
+    const {success,error} = adminEmployeeUpdateSchema.safeParse({name,email,image})
+    if(error){
+        console.log('error occured while parsing admin employee update schema: ',error);
+        return res.status(400).json({error:'Invalid Inputs'})
+    }
+
     try {
         await Employee.findByIdAndUpdate({
             _id: req.params.id
@@ -127,6 +148,15 @@ employeeRouter.put('/update/:id', adminAuth, async (req, res) => {
 })
 
 employeeRouter.put('/changePassword/:id', adminAuth, async (req, res) => {
+
+    const oldPassword = req.body.oldPassword
+    const password = req.body.password
+    const {success,error} = userPasswordSchema.safeParse({oldPassword,password})
+    if(error){
+        console.log('error occured while parsing admin user password schema: ',error);
+        return res.status(400).json({error:'Invalid Inputs'})
+    }
+
     const salt = bcrypt.genSaltSync(10);
     try {
         if (req.body.oldPassword) {
