@@ -100,7 +100,7 @@ export default function AddDevice() {
                     required: "Model is required!",
                     maxLength: {
                       value: 15,
-                      message: "Company name cannot exceed 15 characters!",
+                      message: "Model name cannot exceed 15 characters!",
                     },
                   })}
                   onBlur={(e) => {

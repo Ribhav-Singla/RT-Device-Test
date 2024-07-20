@@ -1,5 +1,5 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import axios from "axios";
 import Spinner from "../../../Common/Spinner";
@@ -19,10 +19,12 @@ export default function () {
   const [image, setImage] = useState<File | string>("");
   const [deviceData, setDeviceData] = useState("");
   const [loading, setLoading] = useState(true);
+  const imageRef = useRef(null)
 
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<Inputs>();
 
@@ -73,27 +75,30 @@ export default function () {
   };
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    
     try {
-      setBtnLoader(true)
+      setBtnLoader(true);
       const imageURL = await uploadImage();
       const formData = new FormData();
       formData.append("model", data.model);
       formData.append("company", data.company);
       formData.append("image", imageURL);
-      const response = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/v1/admin/device/update/${id}`,formData,{
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `${localStorage.getItem("token")}`
-          }
-      })
+      const response = await axios.put(
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/admin/device/update/${id}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `${localStorage.getItem("token")}`,
+          },
+        }
+      );
       await new Promise((r) => setTimeout(r, 1000));
       toast.success(response.data.message);
       setBtnLoader(false);
-      navigate("/admin/devices")
+      navigate("/admin/devices");
     } catch (error) {
       await new Promise((r) => setTimeout(r, 1000));
-      console.log('error: ',error);
+      console.log("error: ", error);
       //@ts-ignore
       toast.error(error.response.data.message);
       setBtnLoader(false);
@@ -114,10 +119,12 @@ export default function () {
         <div className="flex flex-col justify-center items-center rounded md:max-w-[450px] lg:max-w-[600px] w-full px-3 pb-5 bg-blackOlive">
           <div className=" p-3 mb-5 text-center w-full">
             <h1 className="text-2xl font-bold w-full text-floralWhite">
-              update {
+              update{" "}
+              {
                 //@ts-ignore
-              deviceData.model
-              } info
+                deviceData.model
+              }{" "}
+              info
             </h1>
           </div>
           <div className="w-full">
@@ -131,7 +138,18 @@ export default function () {
                   Model
                 </label>
                 <input
-                  {...register("model", { required: "Model is required!" })}
+                  {...register("model", {
+                    required: "Model is required!",
+                    maxLength: {
+                      value: 15,
+                      message: "Model name cannot exceed 15 characters!",
+                    },
+                  })}
+                  onBlur={(e) => {
+                    const trimmedValue = e.target.value.trim();
+                    //@ts-ignore
+                    setValue(e.target.name, trimmedValue);
+                  }}
                   //@ts-ignore
                   defaultValue={deviceData.model}
                   className="w-full pl-2 text-floralWhite bg-eerieBlack"
@@ -143,7 +161,18 @@ export default function () {
                   Company
                 </label>
                 <input
-                  {...register("company", { required: "Company is required!" })}
+                  {...register("company", {
+                    required: "Company is required!",
+                    maxLength: {
+                      value: 15,
+                      message: "Company name cannot exceed 15 characters!",
+                    },
+                  })}
+                  onBlur={(e) => {
+                    const trimmedValue = e.target.value.trim();
+                    //@ts-ignore
+                    setValue(e.target.name, trimmedValue);
+                  }}
                   //@ts-ignore
                   defaultValue={deviceData.company}
                   className="w-full pl-2 text-floralWhite bg-eerieBlack"
@@ -180,11 +209,36 @@ export default function () {
                       </label>
                       <div className="w-full">
                         <input
+                          ref={imageRef}
                           type="file"
                           accept=".png, .jpeg, .jpg"
                           onChange={(e) => {
                             if (e.target.files && e.target.files[0]) {
-                              setImage(e.target.files[0]);
+                              const file = e.target.files[0];
+                              const fileType = file.type;
+                              const fileSize = file.size;
+
+                              if (
+                                ![
+                                  "image/png",
+                                  "image/jpeg",
+                                  "image/jpg",
+                                ].includes(fileType)
+                              ) {
+                                toast.error(
+                                  "Only PNG, JPEG, and JPG files are allowed"
+                                );
+                                e.target.value = ""; // reset the input value
+                                return;
+                              }
+
+                              if (fileSize > 5 * 1024 * 1024) {
+                                toast.error("File size must not exceed 5MB");
+                                e.target.value = ""; // reset the input value
+                                return;
+                              }
+
+                              setImage(file);
                             }
                           }}
                           className="w-full bg-eerieBlack rounded-md text-floralWhite"
@@ -194,7 +248,13 @@ export default function () {
                     <div className="flex justify-end items-center gap-3 pt-2">
                       <div
                         className="relative cursor-pointer text-red-500 flex flex-col justify-center items-center hover-container"
-                        onClick={() => setImage("")}
+                        onClick={() => {
+                          setImage("")
+                          if(imageRef.current){
+                            //@ts-ignore
+                            imageRef.current.value =""
+                          }
+                        }}
                       >
                         <RiDeleteBin6Line size={22} className="ml-2" />
                         <span className="absolute hidden text-floralWhite bg-blackOlive p-1 border-2 ml-1 rounded-lg mt-2 hover-text-content">
