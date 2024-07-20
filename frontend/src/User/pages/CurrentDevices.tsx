@@ -150,12 +150,7 @@ export default function CurrentDevices() {
                 <div className="w-[190px] absolute">
                   {
                     //@ts-ignore
-                    showDevice ? (
-                      <DeviceFilter
-                        filterselectedDevices={filterselectedDevices}
-                        setFilterSelectedDevices={setFilterSelectedDevices}
-                        setPage={setPage}
-                      />
+                    showDevice ? ( <DeviceFilter filterselectedDevices={filterselectedDevices} setFilterSelectedDevices={setFilterSelectedDevices} setPage={setPage} />
                     ) : (
                       ""
                     )
