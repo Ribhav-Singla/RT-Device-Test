@@ -12,10 +12,6 @@ const deviceSchema = new mongoose.Schema({
     image:{
         type : String,
     },
-    createdAt:{
-        type : Date,
-        default : Date.now()
-    },
     isBooked :{
         type : Boolean,
         default : false
@@ -26,8 +22,8 @@ const deviceSchema = new mongoose.Schema({
     },
     bookedDate :{
         type : Date
-    }
-})
+    },
+},{timestamps:true})
 
 deviceSchema.pre('save', function(next) {
     if (this.isBooked && !this.bookedDate) {
