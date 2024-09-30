@@ -9,4 +9,4 @@ Developed during first intership june 2024 - july 2024
 
 /users
 
-  password: <firstname>@123
+  password: 'user's firstname'@123
