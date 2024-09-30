@@ -15,7 +15,15 @@ mongoose.connect('mongodb+srv://ribhavsingla:65fRLQQa1jKtstQr@cluster0.fb6ouk3.m
 
 const PORT = process.env.PORT || 3000
 const app = express()
-app.use(cors())
+
+const corsOptions = {
+    origin: '*', // Allow requests only from your frontend URL
+    methods: ["GET", "POST"], // Specify the HTTP methods allowed
+    allowedHeaders: ["Content-Type", "Authorization"], // Specify the headers allowed
+    credentials: true, // If you need to send cookies or authentication headers
+  };
+
+app.use(cors(corsOptions))
 const server = createServer(app)
 intializeSocket(server)
 
